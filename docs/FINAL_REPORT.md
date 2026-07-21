@@ -8,9 +8,9 @@ memory store, inspectable selection trace, offline web demo, optional GPT-5.6 So
 Responses API boundary, and a reproducible evaluation package.
 
 The automated offline scope is complete, and one credentialed GPT-5.6 Sol smoke
-test completed over public demo data. External publication, legal eligibility, the
-Codex `/feedback` identifier, and video upload remain operator steps and were not
-fabricated or bypassed.
+test completed over public demo data. The source repository and release artifacts
+are public. Legal eligibility confirmation, final Devpost submission, and YouTube
+upload remain operator-gated steps and were not fabricated or bypassed.
 
 ## Delivered system
 
@@ -58,8 +58,8 @@ window size, or permanent model memory.
 
 The full policy also records 1.000 current-fact recall, 0 budget violations, 1.000
 determinism, and zero full-policy failure entries under the declared failure
-categories. Its host-dependent final-packet selection latency was 52.75 ms mean and
-54.89 ms p95 on Python 3.14 / Windows 11. The artifact includes 1,731 structured failure
+categories. Its host-dependent final-packet selection latency was 55.23 ms mean and
+68.43 ms p95 on Python 3.14 / Windows 11. The artifact includes 1,731 structured failure
 entries across baselines and ablations rather than suppressing negative cases.
 
 Paired Recall@budget improvements for full Acheon minus comparator were:
@@ -137,9 +137,9 @@ The reviewed publication boundary is the allowlisted ZIP, not this development
 repository's existing Git metadata. Create a fresh submission repository from the
 archive; do not mirror or `push --all` the development repository.
 
-Before submission, the operator must confirm legal eligibility, add the `/feedback`
-session ID, choose repository visibility,
-record a narrated YouTube demo under three minutes, test all judge-access paths, and
+Before submission, the operator must confirm legal eligibility, verify the recorded
+Codex session ID, record and publish the prepared narrated YouTube demo under three
+minutes, test all judge-access paths, and
 submit before **2026-07-21 17:00 PDT / 2026-07-22 08:00 Asia/Shanghai**.
 
 ## Reproduction receipts
@@ -169,3 +169,4 @@ python scripts/verify_release.py --require-archive
 Timing and the top-level report digest change across hosts because timing is part of
 the report; selected IDs, absolute selection metrics, workload digest, and
 configuration digest are deterministic for the fixed release input.
+
