@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "acheon-context"
+version = "0.1.0"
+description = "Auditable context orchestration for long-running AI workflows."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Acheon contributors"}]
+keywords = ["context", "memory", "agents", "openai", "developer-tools"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+dependencies = []
+
+[project.optional-dependencies]
+openai = ["openai>=2.15,<3"]
+dev = ["pillow>=11,<13", "pytest>=8,<9", "ruff>=0.9,<1"]
+
+[project.scripts]
+acheon = "acheon.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+acheon = ["py.typed", "web/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

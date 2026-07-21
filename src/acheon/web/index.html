@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Acheon compiles bounded, auditable context for long-running AI workflows."
+    />
+    <title>Acheon Context Lab</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Acheon home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>ACHEON</span>
+      </a>
+      <div class="runtime-state" id="runtime-state" aria-live="polite">
+        <span class="state-dot"></span>
+        <span id="runtime-label">Checking runtime…</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Context orchestration, made inspectable</p>
+        <h1>Carry the right context.<br /><span>Leave the noise behind.</span></h1>
+        <p class="hero-copy">
+          Acheon selects a bounded set of versioned records for the task at hand,
+          then shows exactly what made the cut and why.
+        </p>
+        <div class="hero-metrics" aria-label="Product characteristics">
+          <span><b>01</b> deterministic core</span>
+          <span><b>02</b> explicit lifecycle</span>
+          <span><b>03</b> auditable receipts</span>
+        </div>
+      </section>
+
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="panel control-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Live workspace</p>
+              <h2 id="workspace-title">Compile a context packet</h2>
+            </div>
+            <span class="step-tag">LOCAL</span>
+          </div>
+
+          <label for="query">Current task</label>
+          <textarea id="query" rows="5">What should we verify before shipping the offline developer demo?</textarea>
+
+          <div class="field-grid">
+            <div>
+              <label for="namespace">Namespace</label>
+              <input id="namespace" value="demo" maxlength="128" />
+            </div>
+            <div>
+              <label for="budget">Estimated context budget</label>
+              <div class="budget-input">
+                <input id="budget" type="range" min="200" max="1800" step="100" value="800" />
+                <output id="budget-value" for="budget">800</output>
+                <span>est. tokens</span>
+              </div>
+            </div>
+          </div>
+
+          <details class="access-details">
+            <summary>Protected HTTP access</summary>
+            <label for="http-token">Bearer token (optional on loopback)</label>
+            <input
+              id="http-token"
+              type="password"
+              autocomplete="off"
+              placeholder="Required for protected or non-loopback POST routes"
+            />
+            <small>Held only in this page while it remains open; never added to a packet.</small>
+          </details>
+
+          <div class="actions">
+            <button class="button secondary" id="seed-button" type="button">
+              <span>1</span> Seed sample records
+            </button>
+            <button class="button primary" id="compile-button" type="button">
+              <span>2</span> Compile
+            </button>
+            <button class="button ghost" id="ask-button" type="button">
+              Ask GPT-5.6
+            </button>
+          </div>
+          <p class="action-note" id="action-note">
+            Start with the sample corpus. Compilation remains fully offline.
+          </p>
+        </div>
+
+        <aside class="panel receipt-panel" aria-labelledby="receipt-title">
+          <div class="panel-heading compact">
+            <div>
+              <p class="kicker">Packet receipt</p>
+              <h2 id="receipt-title">Selection at a glance</h2>
+            </div>
+          </div>
+          <div class="empty-state" id="receipt-empty">
+            <div class="empty-orbit" aria-hidden="true"><i></i></div>
+            <p>Your compiled receipt will appear here.</p>
+          </div>
+          <div class="receipt-content hidden" id="receipt-content">
+            <div class="usage-row">
+              <div class="usage-ring" id="usage-ring"><span id="usage-percent">0%</span></div>
+              <div>
+                <strong id="usage-copy">0 / 0</strong>
+                <small>estimated tokens used</small>
+              </div>
+            </div>
+            <dl class="receipt-facts">
+              <div><dt>Selected</dt><dd id="selected-count">0</dd></div>
+              <div><dt>Policy</dt><dd id="policy-value">—</dd></div>
+              <div><dt>Audit</dt><dd id="audit-value">—</dd></div>
+            </dl>
+            <div class="digest-block">
+              <span>Packet digest</span>
+              <code id="digest-value">—</code>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="results" id="results" aria-live="polite">
+        <div class="result-column">
+          <div class="section-heading">
+            <div>
+              <p class="kicker">Decision trace</p>
+              <h2>Why each record moved</h2>
+            </div>
+            <span id="trace-count">No run yet</span>
+          </div>
+          <div class="trace-list" id="trace-list">
+            <div class="placeholder-card">Compile a packet to inspect reason codes.</div>
+          </div>
+        </div>
+
+        <div class="result-column">
+          <div class="section-heading">
+            <div>
+              <p class="kicker">Model boundary</p>
+              <h2>Answer or request preview</h2>
+            </div>
+          </div>
+          <div class="model-output" id="model-output">
+            <p>
+              No model request has been made. If no API key is configured, Ask returns an
+              explicit preview and never invents an online answer.
+            </p>
+          </div>
+          <details class="packet-details">
+            <summary>Inspect compiled context</summary>
+            <pre id="packet-output">No packet compiled.</pre>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Acheon · application-layer context orchestration</span>
+      <span>Offline core / optional OpenAI Responses API</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "schema_version": "acheon.live-runtime-observation.v1",
+  "evidence_level": "live_model_observation",
+  "scope": "One successful GPT-5.6 Sol Responses API smoke test over the repository's public seeded demo records.",
+  "observed_at": "2026-07-21T22:32:45.447131+00:00",
+  "request": {
+    "requested_model": "gpt-5.6-sol",
+    "query": "What constraints govern the release, and what evidence is still missing?",
+    "store": false,
+    "preview_only": false,
+    "input_data": "Public synthetic demo records included with Acheon; no private conversation data."
+  },
+  "response": {
+    "returned_model": "gpt-5.6-sol",
+    "status": "completed",
+    "latency_ms": 11530.3,
+    "request_id": "req_161ced8fbdf04079ba086d181eae2304",
+    "response_id": "resp_0fcaf3756e61e72d016a5ff39209488195ae6f14737c644e8c",
+    "usage": {
+      "input_tokens": 742,
+      "output_tokens": 382,
+      "reasoning_tokens": 55,
+      "total_tokens": 1124
+    },
+    "result_summary": "The response summarized the public sample's release constraints and identified outstanding submission evidence.",
+    "answer_text_included": false
+  },
+  "context_packet": {
+    "digest": "bb085270c45cdb5f378c7ce2233c243eca74b1b8bb6f6312f57757f3a52f934c",
+    "budget_estimated_units": 800,
+    "used_estimated_units": 571,
+    "selected_record_ids": [
+      "demo-product-boundary",
+      "demo-online-eval",
+      "demo-traceability",
+      "demo-offline-first",
+      "demo-test-contract",
+      "demo-readiness"
+    ]
+  },
+  "failures": [],
+  "claim_boundary": {
+    "runtime_path_observed": true,
+    "comparative_answer_quality_evaluated": false,
+    "general_model_improvement_claimed": false,
+    "notes": "This single smoke test demonstrates a completed provider call and receipt capture. It is not a raw-versus-Acheon comparison and does not establish general answer-quality improvement, expanded model context, or permanent model memory."
+  }
+}
