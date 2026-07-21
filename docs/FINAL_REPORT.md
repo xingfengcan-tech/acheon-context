@@ -58,8 +58,8 @@ window size, or permanent model memory.
 
 The full policy also records 1.000 current-fact recall, 0 budget violations, 1.000
 determinism, and zero full-policy failure entries under the declared failure
-categories. Its host-dependent final-packet selection latency was 55.23 ms mean and
-68.43 ms p95 on Python 3.14 / Windows 11. The artifact includes 1,731 structured failure
+categories. Host-dependent final-packet selection timing is recorded in the JSON
+artifact and is not treated as a portable quality claim. The artifact includes 1,731 structured failure
 entries across baselines and ablations rather than suppressing negative cases.
 
 Paired Recall@budget improvements for full Acheon minus comparator were:
@@ -146,7 +146,7 @@ submit before **2026-07-21 17:00 PDT / 2026-07-22 08:00 Asia/Shanghai**.
 
 - Benchmark schema: `acheon.offline-selection-benchmark.v1`
 - Benchmark report digest:
-  `19744385e632ac547bdd6a1c2144bfc43addc2d8383a53e5996e888fa561d11e`
+  `f7f41fda9743fef6ff7d75c8fd3e13d6cc48e5a40e56d535c1b328616bf10019`
 - Workload digest:
   `69095ac3c1115063e9f6a1e1f91bacce8793ad12aac2d8fbb5368026b441471d`
 - Configuration digest:
