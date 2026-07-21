@@ -96,10 +96,11 @@ improvement.
 - Repository URL: `https://github.com/xingfengcan-tech/acheon-context`
 - Demo URL or test path: prebuilt `v0.1.0` wheel plus local `acheon demo` / `acheon serve`
 - Public/unlisted YouTube URL under three minutes: `PENDING`
-- Codex `/feedback` session ID: `PENDING`
+- Codex primary task/session ID: `019f7787-780d-7e62-8918-56173a220195`
 - Team members and legal eligibility: `PENDING`
 - Live GPT-5.6 artifact: `artifacts/online/latest.json` (single-run smoke-test scope)
 
 Official requirements: [Devpost challenge](https://openai.devpost.com/),
 [rules](https://openai.devpost.com/rules), and
 [FAQ](https://openai.devpost.com/details/faqs).
+
