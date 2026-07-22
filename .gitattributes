@@ -1,0 +1,3 @@
+contributions/openai/evals/registry/data/long-horizon-context-integrity/*.jsonl text eol=lf
+contributions/openai/evals/registry/evals/long-horizon-context-integrity.yaml text eol=lf
+contributions/openai/evals/registry/modelgraded/long-horizon-context-integrity.yaml text eol=lf

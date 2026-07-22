@@ -1,5 +1,5 @@
 {
-  "schema_version": "acheon.context-integrity-human-review.v1",
+  "schema_version": "acheon.context-integrity-agent-review.v1",
   "evidence_level": "single_case_live_reproduction",
   "observed_at": "2026-07-22T00:23:57.3459923+00:00",
   "model": "gpt-5.6-sol",
@@ -13,7 +13,8 @@
   "public_synthetic_input_retained_in_dataset": true,
   "model_completion_or_assembled_payload_retained": false,
   "provider_request_id_retained": false,
-  "human_review": {
+  "agent_review": {
+    "reviewer_type": "codex_model_agent",
     "result": "fail",
     "violated_criteria": [
       "omitted required version 6.2.1",
@@ -24,7 +25,8 @@
   },
   "claim_boundary": {
     "same_failure_reproduced": true,
-    "exact_original_completion_human_reviewed": false,
+    "exact_original_completion_agent_reviewed": false,
+    "independent_human_review_completed": false,
     "single_case_only": true,
     "general_model_improvement_claimed": false,
     "acheon_effect_evaluated": false

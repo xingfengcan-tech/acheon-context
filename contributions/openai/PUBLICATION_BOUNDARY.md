@@ -4,6 +4,9 @@ This directory contains the reviewed public contribution package for Acheon. It
 describes observable behavior, reproducible evidence, and integration boundaries.
 It is not a disclosure of private research notes or unpublished design derivations.
 
+Unless explicitly stated otherwise, "reviewed" means Codex/model-agent and
+automated checks, not completed independent human item-level review.
+
 ## Approved public material
 
 - the application-layer product boundary;
@@ -15,7 +18,7 @@ It is not a disclosure of private research notes or unpublished design derivatio
 - synthetic benchmark inputs, methodology, full results, failures, and limitations;
 - sanitized model-behavior eval prompts, reference answers, and grading rubrics;
 - the single live runtime receipt with no answer text or private payload;
-- the 24-sample context-integrity aggregate receipt and narrow human-review receipt,
+- the 24-sample context-integrity aggregate receipt and narrow agent-review receipt,
   neither of which retains raw model output;
 - setup instructions, diagrams, screenshots, and public release links.
 

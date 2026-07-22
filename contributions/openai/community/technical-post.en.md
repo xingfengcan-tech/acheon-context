@@ -46,13 +46,15 @@ answer-quality comparison.
 The repository now includes a proposed 24-sample OpenAI Evals contribution for
 early-constraint retention, supersession, revocation, dependency completeness,
 scope isolation, conflict disclosure, untrusted-history handling, budget priority,
-and calibrated uncertainty. It also includes 16 human-labeled positive and negative
-answers for meta-evaluating the grader. One preliminary GPT-5.6 Sol run produced
-16/16 grader agreement and 23/24 automated primary passes; a separately inspected
-reproduction of the one failure omitted two required traceability details. This is
-not an Acheon-versus-baseline result. The next evidence gate is a same-model,
-equal-token comparison against stronger hybrid retrieval, summarization, and
-long-context baselines on held-out tasks.
+and calibrated uncertainty. It also includes 16 provisionally labeled positive and
+negative answers for meta-evaluating the grader. One preliminary GPT-5.6 Sol run
+produced 16/16 agreement with those provisional labels and 23/24 automated primary
+passes; a targeted reproduction check of the one failure omitted two required
+traceability details. Independent human review of the samples, reference answers,
+and labels remains a pre-submission gate. This is not an Acheon-versus-baseline
+result. The next evidence gate is a same-model, equal-token comparison against
+stronger hybrid retrieval, summarization, and long-context baselines on held-out
+tasks.
 
 I would especially appreciate feedback on:
 

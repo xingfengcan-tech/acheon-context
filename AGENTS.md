@@ -22,8 +22,9 @@ or claim permanent model memory.
 
 ```powershell
 python -m unittest discover -s tests -v
-python -m acheon.evals.run --output artifacts/benchmark/latest.json
-python scripts/verify_release.py
+$benchmarkCheck = Join-Path $env:TEMP "acheon-benchmark-check.json"
+python -m acheon.evals.run --output $benchmarkCheck
+python scripts/verify_release.py --compare-benchmark $benchmarkCheck
 ```
 
 Online GPT-5.6 evaluation is optional and must be reported separately from the

@@ -8,7 +8,9 @@ context-window size, or permanent model memory.
 Run the release-sized workload from the repository root:
 
 ```powershell
-python -m acheon.evals.run --output artifacts/benchmark/latest.json
+$benchmarkCheck = Join-Path $env:TEMP "acheon-benchmark-check.json"
+python -m acheon.evals.run --output $benchmarkCheck
+python scripts/verify_release.py --compare-benchmark $benchmarkCheck
 ```
 
 The default generator creates 240 cases across six synthetic configurations, with 64 historical

@@ -227,7 +227,7 @@
       },
       {
         "id": "context_integrity_review",
-        "label": "Human-reviewed reproduction of the one observed failure",
+        "label": "Agent-reviewed reproduction of the one observed failure",
         "path": "artifacts/online/context-integrity-failure-review.json"
       }
     ],
@@ -280,7 +280,7 @@
       {
         "id": "method",
         "type": "markdown",
-        "body": "## The audit recomputed headline values and tested the release boundary\n\nThe review reran all tests, code-format checks, diff checks, and release verification; parsed the machine-readable benchmark; checked case uniqueness, label distributions, budgets, system aggregates, and failure counts; reproduced the public context packet from the live receipt; ran one standalone 24-sample context-integrity observation with a labeled grader meta-eval; and compared the public architecture with primary literature on retrieval-augmented, hierarchical, lifecycle-aware, dependency-aware, and auditable memory systems. Descriptive evidence and prospective impact were evaluated separately."
+        "body": "## The audit recomputed headline values and tested the release boundary\n\nThe review reran all tests, code-format checks, diff checks, and release verification; parsed the machine-readable benchmark; checked case uniqueness, provisional label distributions, budgets, system aggregates, and failure counts; reproduced the public context packet from the live receipt; ran one standalone 24-sample context-integrity observation against provisional meta-eval labels; and compared the public architecture with primary literature on retrieval-augmented, hierarchical, lifecycle-aware, dependency-aware, and auditable memory systems. Descriptive evidence and prospective impact were evaluated separately."
       },
       {
         "id": "limitations",
@@ -450,7 +450,7 @@
     },
     {
       "id": "context_integrity_review",
-      "label": "Human-reviewed reproduction of the one observed failure",
+      "label": "Agent-reviewed reproduction of the one observed failure",
       "path": "artifacts/online/context-integrity-failure-review.json"
     }
   ]

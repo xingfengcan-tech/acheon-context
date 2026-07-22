@@ -4,6 +4,9 @@ This directory is a reviewed, credential-free handoff for presenting Acheon's
 observable context-governance behavior to OpenAI. It deliberately separates
 reproducible engineering evidence from hypotheses about downstream model quality.
 
+Unless explicitly stated otherwise, "reviewed" in this package means Codex/model-
+agent and automated checks, not completed independent human item-level review.
+
 The 2026 OpenAI Build Week challenge closed on July 21 at 5:00 PM PT. These files
 therefore target contribution routes that remain useful after the prize deadline:
 
@@ -16,6 +19,8 @@ therefore target contribution routes that remain useful after the prize deadline
    organization-approved API feedback.
 
 `PUBLICATION_BOUNDARY.md` is authoritative for what may leave this repository.
+`OFFICIAL_PATH_DECISION.md` records the chosen identity, copyright, license, and
+agreement structure for the no-video routes.
 `disclosure-manifest.json` records the evidence level and every operator-controlled
 external action.
 
@@ -24,8 +29,9 @@ external action.
 - **Reproducible:** deterministic core behavior, 61 tests, release verification,
   and exact results on the disclosed 240-case synthetic selection workload.
 - **Observed once:** one GPT-5.6 Sol Responses API smoke-test receipt, plus one
-  24-sample standalone context-integrity run with a validated model grader (23/24
-  passing, one separately reproduced traceability omission).
+  24-sample standalone context-integrity run with a same-model grader that agreed
+  with all 16 provisional labels (23/24 passing, one separately reproduced
+  traceability omission). Item-level independent human review is pending.
 - **Not established:** same-model answer-quality improvement, independent
   comparison attributable to Acheon, independent replication, real-workflow gains,
   or paradigm-level impact.

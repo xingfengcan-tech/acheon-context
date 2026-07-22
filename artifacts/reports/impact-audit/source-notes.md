@@ -31,10 +31,11 @@
 - Confirmed every case shares six relevant and four forbidden labels, one dependency,
   one current fact, 64 history records, and a 640-unit budget.
 - Confirmed the online receipt has no answer text and no comparative quality score.
-- Ran one standalone 24-sample GPT-5.6 Sol context-integrity observation: the
-  labeled grader meta-eval was 16/16, the primary automated result was 23/24 with
-  no invalid grader outputs, and a separate human-inspected reproduction confirmed
-  the one traceability-omission failure. This run did not include an Acheon condition.
+- Ran one standalone 24-sample GPT-5.6 Sol context-integrity observation: agreement
+  with provisional grader labels was 16/16, the primary automated result was 23/24
+  with no invalid grader outputs, and an agent-reviewed targeted reproduction
+  confirmed the one traceability-omission failure. Item-level independent human
+  review remains pending. This run did not include an Acheon condition.
 - Portable-report data validation and packaging passed. The bundled report tool had
   no headless Chromium, and the in-app browser could not access the isolated local
   preview, so visual and source-dialog interaction checks remain structural-only.

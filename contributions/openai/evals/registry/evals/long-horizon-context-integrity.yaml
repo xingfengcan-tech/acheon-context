@@ -16,8 +16,8 @@ long-horizon-context-integrity.dev.v0:
 long-horizon-context-integrity-meta:
   id: long-horizon-context-integrity-meta.dev.v0
   description: >-
-    Meta-evaluates the long-horizon context-integrity grader against human-labeled
-    passing and failing candidate answers.
+    Meta-evaluates the long-horizon context-integrity grader against provisionally
+    labeled passing and failing candidate answers; independent human review is pending.
   metrics: [accuracy]
 
 long-horizon-context-integrity-meta.dev.v0:

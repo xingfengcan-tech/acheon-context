@@ -6,6 +6,7 @@
   "public_release": "https://github.com/xingfengcan-tech/acheon-context/releases/tag/v0.1.0",
   "approved_files": [
     "README.md",
+    "OFFICIAL_PATH_DECISION.md",
     "PUBLICATION_BOUNDARY.md",
     "disclosure-manifest.json",
     "showcase/fields.en.json",
@@ -59,6 +60,7 @@
     "rights_and_authority_attestation",
     "showcase_program_agreement",
     "open_source_eval_data_license_confirmation",
+    "independent_human_eval_item_review",
     "community_account_identity",
     "organization_level_data_sharing_choice"
   ]

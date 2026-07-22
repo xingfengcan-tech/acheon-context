@@ -30,9 +30,11 @@ knowledge. They target failures that can make coding agents, incident assistants
 support tools, and workflow copilots confidently act on stale, incomplete,
 cross-scope, or unsupported context.
 
-The primary set contains 24 manually authored examples across 24 domains. A
-separate 16-candidate meta-eval supplies eight human-labeled passing answers and
-eight human-labeled failing answers, covering every behavior category.
+The primary set contains 24 project-specific synthetic examples across 24 domains,
+primarily drafted and checked by Codex/model agents. A separate 16-candidate
+meta-eval supplies eight provisionally labeled passing answers and eight
+provisionally labeled failing answers, covering every behavior category. No
+item-level independent human review has been completed.
 
 ## Category fit
 
@@ -47,13 +49,15 @@ eight human-labeled failing answers, covering every behavior category.
 - [x] **Thematically consistent.** Every sample tests current-state reconstruction
   from a chronological context record.
 - [x] **Contains an observed model failure.** In one preliminary GPT-5.6 Sol run,
-  the validated model grader marked `lhci-016` as failing; a separately
-  human-inspected reproduction omitted the required version and issue identifier.
+  the same-model grader marked `lhci-016` as failing and agreed with all 16
+  provisional meta-eval labels; a separately reproduced response omitted the
+  required version and issue identifier.
   The result is narrow and must not be generalized beyond this sample and setup.
 - [x] **Good signal for correct behavior.** Every primary sample has an exhaustive
-  `criteria` field and a human-authored `ideal` response.
-- [x] **At least 15 high-quality examples.** The primary set has 24 hand-authored
-  examples, with three examples in each of eight behavior categories.
+  `criteria` field and a reference `ideal` response.
+- [ ] **At least 15 high-quality examples.** The candidate set has 24 individually
+  constructed synthetic examples, with three examples in each of eight behavior
+  categories; independent human review is required before checking this item.
 - [x] **Human-solvable.** All required evidence is present in the supplied record,
   except where the correct behavior is explicitly to preserve uncertainty.
 
@@ -72,7 +76,7 @@ the rest of the answer is fluent.
 
 - [x] Primary data is staged for
   `evals/registry/data/long-horizon-context-integrity/samples.jsonl`.
-- [x] Human-labeled grader validation is staged for
+- [x] Provisionally labeled grader validation is staged for
   `evals/registry/data/long-horizon-context-integrity/grader_validation.jsonl`.
 - [x] Eval aliases and implementations are staged for
   `evals/registry/evals/long-horizon-context-integrity.yaml`.
@@ -82,9 +86,13 @@ the rest of the answer is fluent.
   added.
 - [ ] After copying into the upstream fork, track both JSONL files with Git LFS and
   verify the `filter=lfs` attribute.
-- [ ] Repeat the primary eval and labeled meta-eval through the upstream `oaieval`
-  path with the chosen approved solver; report solver IDs, configuration, aggregate
-  and per-category results, invalid grader outputs, and every failed sample.
+- [x] A full local-upstream `oaieval dummy` smoke traversed 24 primary and 16 meta
+  samples with exit code zero; dummy outputs are intentionally invalid and are not
+  performance evidence.
+- [ ] Repeat the primary eval and provisional-label meta-eval through the upstream
+  `oaieval` path with the chosen approved real solver; report solver IDs,
+  configuration, aggregate and per-category results, invalid grader outputs, and
+  every failed sample.
 
 # Structural validation and preliminary model observation
 
@@ -95,19 +103,21 @@ the rest of the answer is fluent.
   balance is 8 `Y` / 8 `N`.
 - Required fields, chat-message structure, duplicate IDs, label values, and
   credential/prohibited-term scans pass.
-- Both YAML files passed structural checks and a PyYAML 6.0.3 parse in an isolated
-  local validation environment. The contributor should repeat the parse and verify
-  registry alias resolution in the upstream checkout before submission.
+- Both YAML files passed structural checks and a PyYAML 6.0.3 parse. In a local
+  checkout of upstream commit `8eac7a7de5215c907fbddc30efdaf316913eccdd`, the
+  Registry resolved both aliases and full primary/meta dummy smokes exited zero.
+  These checks must be repeated in the formal contribution branch.
 - A direct Responses API observation with GPT-5.6 Sol and `store=false` produced
-  16/16 agreement on the labeled grader meta-eval and 23/24 passing primary cases,
-  with no invalid grader outputs. `lhci-016` was the only automated failure.
+  16/16 agreement with provisional meta-eval labels and 23/24 passing primary
+  cases, with no invalid grader outputs. `lhci-016` was the only automated failure.
 - Public synthetic inputs are retained in this Eval dataset. Model completion text,
   assembled grader payloads, and provider request IDs were not retained. The
   aggregate receipt records hashes, choices, failure IDs, per-call usage, and the evidence boundary at
   `artifacts/online/context-integrity-latest.json` in the Acheon repository.
 - The same model generated and graded the answers, the run had one repetition, and
-  the original failing completion was not human-reviewed. A separate reproduction
-  was human-reviewed and omitted version `6.2.1` and issue ID `BUG-731`.
+  the original failing completion was not retained for review. A targeted
+  reproduction check omitted version `6.2.1` and issue ID `BUG-731`; this was an
+  agent review, not independent human review.
 
 # Final checklist
 
@@ -117,8 +127,10 @@ the rest of the answer is fluent.
   complies with OpenAI's usage policies.
 - [ ] I confirm that I have adequate rights to upload all data in this eval.
 
-The scenarios are original, fictional, and contain no personal or proprietary
-data, but the human contributor must make the legal attestations.
+The project-specific fictional text was primarily drafted and checked by
+Codex/model agents. Automated scans found no known personal or proprietary input;
+independent human rights and privacy review is pending, and the human contributor
+must make the legal attestations.
 
 ## Email address validation — contributor action required
 
@@ -134,9 +146,12 @@ data, but the human contributor must make the legal attestations.
 ## Submit eval
 
 - [x] All descriptive fields in this draft are filled out.
+- [ ] An independent human has reviewed all task records, criteria, reference
+  answers, candidate answers, and provisional labels.
 - [ ] JSONL files have been added to Git LFS in the upstream fork.
 - [x] A preliminary direct Responses API result and meta-eval result are documented.
-- [ ] The upstream `oaieval` run has been completed and attached.
+- [x] A complete upstream `oaieval dummy` smoke receipt is documented.
+- [ ] A real upstream-supported-solver `oaieval` run has been completed and attached.
 - [x] No custom code is included, so code-only formatter checks are not applicable.
 
 # Eval JSON data: five representative samples
