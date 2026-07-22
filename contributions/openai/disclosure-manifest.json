@@ -1,0 +1,65 @@
+{
+  "schema_version": "acheon.openai-contribution-disclosure.v1",
+  "reviewed_on": "2026-07-22",
+  "project": "Acheon",
+  "public_repository": "https://github.com/xingfengcan-tech/acheon-context",
+  "public_release": "https://github.com/xingfengcan-tech/acheon-context/releases/tag/v0.1.0",
+  "approved_files": [
+    "README.md",
+    "PUBLICATION_BOUNDARY.md",
+    "disclosure-manifest.json",
+    "showcase/fields.en.json",
+    "showcase/description.en.md",
+    "showcase/setup.txt",
+    "showcase/cover-alt.txt",
+    "community/technical-post.en.md",
+    "community/short-summary.en.md",
+    "api-feedback/expected-behavior.md",
+    "api-feedback/feedback-notes.jsonl",
+    "api-feedback/sanitized-cases.jsonl",
+    "evals/DATASET_CARD.md",
+    "evals/PR_BODY.md",
+    "evals/README.md",
+    "evals/VALIDATION.md",
+    "evals/registry/data/long-horizon-context-integrity/grader_validation.jsonl",
+    "evals/registry/data/long-horizon-context-integrity/samples.jsonl",
+    "evals/registry/evals/long-horizon-context-integrity.yaml",
+    "evals/registry/modelgraded/long-horizon-context-integrity.yaml"
+  ],
+  "deferred_files": {},
+  "approved_sections": [
+    "publication_boundary",
+    "showcase_fields_and_copy",
+    "sanitized_model_behavior_evals",
+    "developer_community_copy",
+    "sanitized_api_feedback_cases",
+    "impact_audit_with_limitations"
+  ],
+  "excluded_material_classes": [
+    "unpublished_prototype_theory",
+    "internal_derivations",
+    "private_threshold_rationale",
+    "hidden_prompts",
+    "private_conversation_data",
+    "credentials_and_environment_files",
+    "unreviewed_development_history",
+    "unsupported_model_capability_claims"
+  ],
+  "evidence_levels": {
+    "engineering_contracts": "observed_and_reproducible",
+    "synthetic_selection_results": "observed_and_scoped",
+    "live_api_path": "one_smoke_test_observed",
+    "standalone_context_integrity_eval": "one_24_sample_run_observed",
+    "comparative_model_answer_quality": "not_yet_observed",
+    "independent_replication": "not_yet_observed",
+    "paradigm_level_impact": "hypothesis_only"
+  },
+  "external_action_gates": [
+    "identity_and_contact_details",
+    "rights_and_authority_attestation",
+    "showcase_program_agreement",
+    "open_source_eval_data_license_confirmation",
+    "community_account_identity",
+    "organization_level_data_sharing_choice"
+  ]
+}

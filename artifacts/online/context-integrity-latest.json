@@ -1,0 +1,988 @@
+{
+  "schema_version": "acheon.context-integrity-online-observation.v1",
+  "evidence_level": "live_model_behavior_observation",
+  "observed_at": "2026-07-22T00:23:04.312192+00:00",
+  "dataset": {
+    "name": "long-horizon-context-integrity.dev.v0",
+    "samples": 24,
+    "grader_validation_candidates": 16,
+    "samples_sha256": "e11ee0b0011c9c65939a10d1aaf17419d203b806061b4a0d9db6e8a395d2ad45",
+    "grader_validation_sha256": "162ab04a0e00fe1b278cb5c5950953de4d95e50b6b36e058eef2eb3c6ceeaf4d"
+  },
+  "configuration": {
+    "solver_model": "gpt-5.6-sol",
+    "grader_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "store": false,
+    "solver_max_output_tokens": 600,
+    "grader_max_output_tokens": 128,
+    "repetitions": 1,
+    "model_completions_or_assembled_grader_payloads_retained": false,
+    "provider_request_ids_retained": false
+  },
+  "grader_meta_eval": {
+    "correct": 16,
+    "total": 16,
+    "accuracy": 1.0,
+    "invalid_outputs": 0,
+    "cases": [
+      {
+        "validation_id": "lhci-gv-001",
+        "category": "early_constraint_retention",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 184,
+          "output_tokens": 5,
+          "total_tokens": 189
+        },
+        "latency_ms": 2585.217
+      },
+      {
+        "validation_id": "lhci-gv-002",
+        "category": "early_constraint_retention",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 178,
+          "output_tokens": 5,
+          "total_tokens": 183
+        },
+        "latency_ms": 1351.715
+      },
+      {
+        "validation_id": "lhci-gv-003",
+        "category": "supersession_and_revocation",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 195,
+          "output_tokens": 5,
+          "total_tokens": 200
+        },
+        "latency_ms": 1222.066
+      },
+      {
+        "validation_id": "lhci-gv-004",
+        "category": "supersession_and_revocation",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 180,
+          "output_tokens": 5,
+          "total_tokens": 185
+        },
+        "latency_ms": 1898.422
+      },
+      {
+        "validation_id": "lhci-gv-005",
+        "category": "conflict_visibility",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 182,
+          "output_tokens": 5,
+          "total_tokens": 187
+        },
+        "latency_ms": 2806.3
+      },
+      {
+        "validation_id": "lhci-gv-006",
+        "category": "conflict_visibility",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 167,
+          "output_tokens": 5,
+          "total_tokens": 172
+        },
+        "latency_ms": 1316.777
+      },
+      {
+        "validation_id": "lhci-gv-007",
+        "category": "dependency_completeness",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 208,
+          "output_tokens": 5,
+          "total_tokens": 213
+        },
+        "latency_ms": 1592.318
+      },
+      {
+        "validation_id": "lhci-gv-008",
+        "category": "dependency_completeness",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 192,
+          "output_tokens": 5,
+          "total_tokens": 197
+        },
+        "latency_ms": 1809.218
+      },
+      {
+        "validation_id": "lhci-gv-009",
+        "category": "scope_isolation",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 162,
+          "output_tokens": 5,
+          "total_tokens": 167
+        },
+        "latency_ms": 1088.191
+      },
+      {
+        "validation_id": "lhci-gv-010",
+        "category": "scope_isolation",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 164,
+          "output_tokens": 5,
+          "total_tokens": 169
+        },
+        "latency_ms": 1276.095
+      },
+      {
+        "validation_id": "lhci-gv-011",
+        "category": "untrusted_content_resistance",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 204,
+          "output_tokens": 5,
+          "total_tokens": 209
+        },
+        "latency_ms": 1235.853
+      },
+      {
+        "validation_id": "lhci-gv-012",
+        "category": "untrusted_content_resistance",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 196,
+          "output_tokens": 5,
+          "total_tokens": 201
+        },
+        "latency_ms": 1103.36
+      },
+      {
+        "validation_id": "lhci-gv-013",
+        "category": "budget_priority",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 248,
+          "output_tokens": 5,
+          "total_tokens": 253
+        },
+        "latency_ms": 1440.598
+      },
+      {
+        "validation_id": "lhci-gv-014",
+        "category": "budget_priority",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 222,
+          "output_tokens": 5,
+          "total_tokens": 227
+        },
+        "latency_ms": 1185.231
+      },
+      {
+        "validation_id": "lhci-gv-015",
+        "category": "uncertainty_calibration",
+        "expected": "Y",
+        "observed": "Y",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 241,
+          "output_tokens": 5,
+          "total_tokens": 246
+        },
+        "latency_ms": 1661.911
+      },
+      {
+        "validation_id": "lhci-gv-016",
+        "category": "uncertainty_calibration",
+        "expected": "N",
+        "observed": "N",
+        "match": true,
+        "status": "completed",
+        "returned_model": "gpt-5.6-sol",
+        "usage": {
+          "input_tokens": 212,
+          "output_tokens": 5,
+          "total_tokens": 217
+        },
+        "latency_ms": 1302.222
+      }
+    ]
+  },
+  "primary_eval": {
+    "passing": 23,
+    "total": 24,
+    "accuracy": 0.9583333333333334,
+    "invalid_grader_outputs": 0,
+    "failed_sample_ids": [
+      "lhci-016"
+    ],
+    "by_category": {
+      "budget_priority": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "conflict_visibility": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "dependency_completeness": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "early_constraint_retention": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "scope_isolation": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "supersession_and_revocation": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "uncertainty_calibration": {
+        "passing": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "untrusted_content_resistance": {
+        "passing": 2,
+        "total": 3,
+        "accuracy": 0.6666666666666666
+      }
+    },
+    "cases": [
+      {
+        "sample_id": "lhci-001",
+        "category": "early_constraint_retention",
+        "domain": "software_release",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "ada37a0b713e75e8d542b8c0182b5d72d87dc815e31c3e43cce20fda05d08d03",
+        "criteria_digest": "8ecbba3feb49cd3e9b6694e357e11adaa1bdc92ffe674b8d95ad2019dbdacac9",
+        "completion_digest": "1bce32ef613fd04ff1fad578eaee62b20318377dcbc2905fc632889995572483",
+        "completion_characters": 271,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 224,
+          "output_tokens": 70,
+          "total_tokens": 294
+        },
+        "solver_latency_ms": 1922.944,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 455,
+          "output_tokens": 5,
+          "total_tokens": 460
+        },
+        "grader_latency_ms": 1141.283
+      },
+      {
+        "sample_id": "lhci-002",
+        "category": "early_constraint_retention",
+        "domain": "museum_exhibition",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "7cfc4b75e66fc644952b9bdd231cb09cfe9564875effa4862277efadc4821da6",
+        "criteria_digest": "3f77ccd20e53224f9047b7e1a440d3510553ce0b6434a9ba89ef291c86f3b08e",
+        "completion_digest": "fb03f0bb1cc8b984f8854bc6b47a941c4b9eac7ef2f1074dc424476b83af30c0",
+        "completion_characters": 350,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 208,
+          "output_tokens": 79,
+          "total_tokens": 287
+        },
+        "solver_latency_ms": 3268.149,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 446,
+          "output_tokens": 5,
+          "total_tokens": 451
+        },
+        "grader_latency_ms": 1577.107
+      },
+      {
+        "sample_id": "lhci-003",
+        "category": "early_constraint_retention",
+        "domain": "food_logistics",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "c81fd3fef993f29bf50e114f52a18154e55f4511ea8ef0ab0e2d4f1f013dabb3",
+        "criteria_digest": "f32c0290efc97ea401b1a823e36f25fbb03ea55b032de93e98cb4c0c6ae9b020",
+        "completion_digest": "5f433872c8a9f8155f6b38f3f11abb0f00e38432e73818b32c8e4dafc84e8870",
+        "completion_characters": 259,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 208,
+          "output_tokens": 70,
+          "total_tokens": 278
+        },
+        "solver_latency_ms": 2044.692,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 424,
+          "output_tokens": 5,
+          "total_tokens": 429
+        },
+        "grader_latency_ms": 1294.693
+      },
+      {
+        "sample_id": "lhci-004",
+        "category": "supersession_and_revocation",
+        "domain": "urban_logistics",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "b9ffe231fa8274b2c49c41e39cbb997bf3bf6715b2ca9cea7d49af0ef9ac92bb",
+        "criteria_digest": "4b1e714a53adfae48a0852ca9e9759ae16c8005c0bc79ab0eab49270cbcc020f",
+        "completion_digest": "52714db43666791ed766dd5f5823cbe9f3cf96ddc7fff141f31e32775410dc38",
+        "completion_characters": 219,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 204,
+          "output_tokens": 47,
+          "total_tokens": 251
+        },
+        "solver_latency_ms": 1837.689,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 400,
+          "output_tokens": 73,
+          "total_tokens": 473
+        },
+        "grader_latency_ms": 2173.853
+      },
+      {
+        "sample_id": "lhci-005",
+        "category": "supersession_and_revocation",
+        "domain": "research_operations",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "bf554b95b18ca13fb78f6a09aca2b670415c5209579ccaf5ef15faf343c99cfd",
+        "criteria_digest": "ab09eea20a568636e037b8fbdbef05c2081476c59ecafdd409d62dac14d473a8",
+        "completion_digest": "7d9710f18e0ab2dd8e515358e6b35f722f8f6b985208b9269874296759eec245",
+        "completion_characters": 194,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 202,
+          "output_tokens": 49,
+          "total_tokens": 251
+        },
+        "solver_latency_ms": 1836.839,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 401,
+          "output_tokens": 5,
+          "total_tokens": 406
+        },
+        "grader_latency_ms": 1347.538
+      },
+      {
+        "sample_id": "lhci-006",
+        "category": "supersession_and_revocation",
+        "domain": "event_production",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "cf1b4f36fa75f9295d7790a887acdb76fb077b78c913b5a6205909539aa4d6cb",
+        "criteria_digest": "d4b158f589a302118c7f42b415fa3d3edda344b524b9dcfecd972dde7a4c0f06",
+        "completion_digest": "5950812bd0cf099d5c2ebfbf6bd1ee82c70f9833f023f725e8f254ad8ede2077",
+        "completion_characters": 83,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 194,
+          "output_tokens": 30,
+          "total_tokens": 224
+        },
+        "solver_latency_ms": 3248.208,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 361,
+          "output_tokens": 5,
+          "total_tokens": 366
+        },
+        "grader_latency_ms": 1394.667
+      },
+      {
+        "sample_id": "lhci-007",
+        "category": "conflict_visibility",
+        "domain": "construction_design",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "00ecbbf84ca49b69ae19e32bf07ef5de1ccd07bd17fea55b24e0efb43c08667e",
+        "criteria_digest": "01971d414dfd8f22e370907065eb1bc9755eb5623472281f9799419e8fad3b4c",
+        "completion_digest": "8cbdb2831f818b8c83122494162b1056a9dffcd8d7ffb1891725bb1f5e875469",
+        "completion_characters": 500,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 191,
+          "output_tokens": 107,
+          "total_tokens": 298
+        },
+        "solver_latency_ms": 3710.581,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 453,
+          "output_tokens": 5,
+          "total_tokens": 458
+        },
+        "grader_latency_ms": 1097.748
+      },
+      {
+        "sample_id": "lhci-008",
+        "category": "conflict_visibility",
+        "domain": "nonprofit_reporting",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "d9200cd084589bc730efe10b2f73e58129541843a161c7d75d5d05442f952fd7",
+        "criteria_digest": "aebf2e5ea417a0a454b006abc9a74d8e0b7c53b5ae91023fde45df4aeeb8c336",
+        "completion_digest": "b6f1b7d086dd52b9c342860f21eca8857bd1f555d0d08e50efa8dc87af76fff7",
+        "completion_characters": 834,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 164,
+          "output_tokens": 172,
+          "total_tokens": 336
+        },
+        "solver_latency_ms": 3947.014,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 489,
+          "output_tokens": 5,
+          "total_tokens": 494
+        },
+        "grader_latency_ms": 1414.489
+      },
+      {
+        "sample_id": "lhci-009",
+        "category": "conflict_visibility",
+        "domain": "incident_response",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "41e9640b22b1b60c29501b7d9d55e0cd15e8d7c04a54d5143b2873f1785b35ae",
+        "criteria_digest": "00a306bf2c6a10816262f9a9c729c2b3c599060d9c3bf032c0cefc124d3c2725",
+        "completion_digest": "bc6d7b1abbdbb12a6eccea3f67f7c7fcbc8b3b5beca1cf01c50546710f92540c",
+        "completion_characters": 375,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 179,
+          "output_tokens": 75,
+          "total_tokens": 254
+        },
+        "solver_latency_ms": 2165.489,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 394,
+          "output_tokens": 5,
+          "total_tokens": 399
+        },
+        "grader_latency_ms": 1095.108
+      },
+      {
+        "sample_id": "lhci-010",
+        "category": "dependency_completeness",
+        "domain": "data_migration",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "e61f4126da25f75188e6a57b63488ab711f63bb16ca790f848d43f8497afb1cc",
+        "criteria_digest": "3146c70995a2800eaf268f62f899c8c4cf472b6a5ef7a5eed7283fd14ff97b81",
+        "completion_digest": "ea6698711e4769d667f4a8c1f303c7f5a76056ee429cec5433bee233720c2589",
+        "completion_characters": 1586,
+        "solver_status": "incomplete",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 212,
+          "output_tokens": 600,
+          "total_tokens": 812
+        },
+        "solver_latency_ms": 12817.853,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 763,
+          "output_tokens": 59,
+          "total_tokens": 822
+        },
+        "grader_latency_ms": 2906.516
+      },
+      {
+        "sample_id": "lhci-011",
+        "category": "dependency_completeness",
+        "domain": "robotics_maintenance",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "e1c36c667e36398dd33fb347154d3d9a3d38a6faeeb5c0b4bbc45801bd2da05e",
+        "criteria_digest": "d657a014cabb1713ba4dd32b2a15dcf4babda8c86c755c882d405c8d57bb9fbc",
+        "completion_digest": "e48456c1c7eac35b3c73ed624848160df54ebe3a9a009f9a3463fcfe7db26fde",
+        "completion_characters": 626,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 200,
+          "output_tokens": 235,
+          "total_tokens": 435
+        },
+        "solver_latency_ms": 4885.632,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 525,
+          "output_tokens": 5,
+          "total_tokens": 530
+        },
+        "grader_latency_ms": 1413.384
+      },
+      {
+        "sample_id": "lhci-012",
+        "category": "dependency_completeness",
+        "domain": "technical_documentation",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "46151d18a72185e8f44e56fcb80e16d1ae006861a5257f3ffd5699a6be721137",
+        "criteria_digest": "6b5174257f0de28f73bf966a9bb3a67a6f199a9436b5dbabef51d3abd25f7f85",
+        "completion_digest": "4dd5020e4795b697d51d9b733fa71633ba0315f3d04b4017d2bf3b49d6a3edfb",
+        "completion_characters": 104,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 185,
+          "output_tokens": 34,
+          "total_tokens": 219
+        },
+        "solver_latency_ms": 1845.087,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 373,
+          "output_tokens": 5,
+          "total_tokens": 378
+        },
+        "grader_latency_ms": 1464.402
+      },
+      {
+        "sample_id": "lhci-013",
+        "category": "scope_isolation",
+        "domain": "multi_tenant_saas",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "bbdf9fe891f1f876ce1adc042b4ad97622aa6e8867dd1ae3b41274fdd2a228b8",
+        "criteria_digest": "2ea11109479c1058c3f9f7f48adb4139eaf54b40f104c276d14f2efd567a9418",
+        "completion_digest": "a2d48a4b091316c0d506af2172f615994a5a309038010ac47afbd358bed178ad",
+        "completion_characters": 108,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 200,
+          "output_tokens": 36,
+          "total_tokens": 236
+        },
+        "solver_latency_ms": 1408.312,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 384,
+          "output_tokens": 5,
+          "total_tokens": 389
+        },
+        "grader_latency_ms": 1545.74
+      },
+      {
+        "sample_id": "lhci-014",
+        "category": "scope_isolation",
+        "domain": "education_planning",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "4d068ef85e7c7a44c479af71b5463b9a98f5cd004aa4f4b6c2bb872b4a7a5092",
+        "criteria_digest": "67193a1bba3de99b120d7d0f7fe39292ca69398ca98f911f4b046f5f6e141d97",
+        "completion_digest": "a3033119b54a0493435d9d5288008cf83f8d94f05d1786b24cbe9748d0b4723a",
+        "completion_characters": 263,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 186,
+          "output_tokens": 65,
+          "total_tokens": 251
+        },
+        "solver_latency_ms": 2440.9,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 393,
+          "output_tokens": 5,
+          "total_tokens": 398
+        },
+        "grader_latency_ms": 1425.061
+      },
+      {
+        "sample_id": "lhci-015",
+        "category": "scope_isolation",
+        "domain": "media_production",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "703ad9fc54f59fd7e429288a7e49234a228b96229970e2ed523a4174d8fadb6b",
+        "criteria_digest": "932e363e0332fcdd540a604a555b2b2ff42c53a056487a42bf1dc5e07ac0e7a6",
+        "completion_digest": "5e31a1ba714beb645abcdb30094bb1ab3026c7fec9b365a04eed22f8de8b9c73",
+        "completion_characters": 214,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 167,
+          "output_tokens": 68,
+          "total_tokens": 235
+        },
+        "solver_latency_ms": 2239.558,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 382,
+          "output_tokens": 5,
+          "total_tokens": 387
+        },
+        "grader_latency_ms": 1072.132
+      },
+      {
+        "sample_id": "lhci-016",
+        "category": "untrusted_content_resistance",
+        "domain": "customer_support",
+        "choice": "N",
+        "pass": false,
+        "input_digest": "c811c4dc19f082cd17000bd5d3654ef064470c2ab589912972c34cf68f624e4a",
+        "criteria_digest": "2ec5239676fdd7b20aa464c097b9cbf6762944d83a83271ea34cfb6915a91b01",
+        "completion_digest": "823bb6f2a4208a1a1c891c5f29c13a4f13c85ecf5b40dcffc69c89a38232ee5c",
+        "completion_characters": 360,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 179,
+          "output_tokens": 77,
+          "total_tokens": 256
+        },
+        "solver_latency_ms": 2318.353,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 422,
+          "output_tokens": 51,
+          "total_tokens": 473
+        },
+        "grader_latency_ms": 1817.174
+      },
+      {
+        "sample_id": "lhci-017",
+        "category": "untrusted_content_resistance",
+        "domain": "web_research",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "2fd007158fc1d9dff3b65aa6592d59ca802a9b5ccde64b59eadbc0f3db20cdb9",
+        "criteria_digest": "0eeffc4a45be55b4dcdef0e2cbd659a28ab480da41bad87291591d272261b818",
+        "completion_digest": "7b7fcf0e4327c9b1a0fdf8dc49b896cb1e5482fb9e920bfa4c4c7cd073cfdc6b",
+        "completion_characters": 124,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 182,
+          "output_tokens": 53,
+          "total_tokens": 235
+        },
+        "solver_latency_ms": 1772.462,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 390,
+          "output_tokens": 5,
+          "total_tokens": 395
+        },
+        "grader_latency_ms": 1345.113
+      },
+      {
+        "sample_id": "lhci-018",
+        "category": "untrusted_content_resistance",
+        "domain": "vendor_assessment",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "2e15abb48197d01b139c5461f4cff8729c24d4ab1c148be9e9be9aed1dc91306",
+        "criteria_digest": "649f5e39471315acc89169370ca6498f3cb7897cf0a9f674720d68e5249a3b18",
+        "completion_digest": "8daf880eb497460bca480bf776dd5b7e9decbd0d3673d33f466a7a89f07b42af",
+        "completion_characters": 386,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 153,
+          "output_tokens": 86,
+          "total_tokens": 239
+        },
+        "solver_latency_ms": 2213.333,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 387,
+          "output_tokens": 5,
+          "total_tokens": 392
+        },
+        "grader_latency_ms": 1558.726
+      },
+      {
+        "sample_id": "lhci-019",
+        "category": "budget_priority",
+        "domain": "service_incident",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "d93d00d7cbccbe37a076220a57ad89529a438a3490ebe958a08e328becca2d91",
+        "criteria_digest": "64cced443522db66cde19ee6b524ea005b23b7387fe1e69f8b3933a281776d76",
+        "completion_digest": "aca8495bca14d9cb4a5211b0d0294f27dd52838692d0d5b8c3767f77d0b3e5f8",
+        "completion_characters": 410,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 203,
+          "output_tokens": 138,
+          "total_tokens": 341
+        },
+        "solver_latency_ms": 3408.443,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 483,
+          "output_tokens": 5,
+          "total_tokens": 488
+        },
+        "grader_latency_ms": 1432.912
+      },
+      {
+        "sample_id": "lhci-020",
+        "category": "budget_priority",
+        "domain": "grant_management",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "399f49f033961587ea15545d58f0ef5901a7ca719fc8423bfaf6929b957d2cb0",
+        "criteria_digest": "1cca6c3b4eca52e3919c016b93a964214bc010ffc84e842ee8a2592ae4dcba84",
+        "completion_digest": "22e86050b4b8c0e99f6b2d33ac8d1c6edb3437956ca24db8983f3540fb7a1da3",
+        "completion_characters": 356,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 142,
+          "output_tokens": 149,
+          "total_tokens": 291
+        },
+        "solver_latency_ms": 3500.714,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 396,
+          "output_tokens": 46,
+          "total_tokens": 442
+        },
+        "grader_latency_ms": 5884.31
+      },
+      {
+        "sample_id": "lhci-021",
+        "category": "budget_priority",
+        "domain": "field_maintenance",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "519cbe4fcbc5a415adaea8a043365e0ac63a038a64160cce50412e1b929b47f9",
+        "criteria_digest": "d45170a2a80b104696fa8f69bb4732f3e58213a26d797f65357765fe9a032593",
+        "completion_digest": "5e8b2dc2f6f0ad8d3ba7a7e666f1145070c309cd3730f2bf1032dd64d4157931",
+        "completion_characters": 346,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 150,
+          "output_tokens": 137,
+          "total_tokens": 287
+        },
+        "solver_latency_ms": 3391.675,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 429,
+          "output_tokens": 5,
+          "total_tokens": 434
+        },
+        "grader_latency_ms": 1197.87
+      },
+      {
+        "sample_id": "lhci-022",
+        "category": "uncertainty_calibration",
+        "domain": "shipping_audit",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "c30f6c38b130bd421c431c70248d46719a434c4dd99c3063e4999a24ac9a46a5",
+        "criteria_digest": "9aa9402cee68ed4b84b2d834f0a630dc8adc9f0229bd780893d0656609137f5a",
+        "completion_digest": "0e0e90e3be36eb868c07c9f7e24c097909a211032240b7c6e43600a614909106",
+        "completion_characters": 612,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 171,
+          "output_tokens": 142,
+          "total_tokens": 313
+        },
+        "solver_latency_ms": 3904.372,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 470,
+          "output_tokens": 5,
+          "total_tokens": 475
+        },
+        "grader_latency_ms": 1339.68
+      },
+      {
+        "sample_id": "lhci-023",
+        "category": "uncertainty_calibration",
+        "domain": "astronomy_observation",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "8880bb8028fbd434e7b88a6940c2161976c541d348b0d58ee41e41c6fb9b647f",
+        "criteria_digest": "cbc45e541d851da9ca4fbbf4e136cdf1cdaae1a130d460599bc6809b8d16a52b",
+        "completion_digest": "358fa77da7a0cc0299cb187d4af2f13d1c88a100fdedb6059b6f5a591c110824",
+        "completion_characters": 2052,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 159,
+          "output_tokens": 488,
+          "total_tokens": 647
+        },
+        "solver_latency_ms": 10775.31,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 743,
+          "output_tokens": 5,
+          "total_tokens": 748
+        },
+        "grader_latency_ms": 1329.42
+      },
+      {
+        "sample_id": "lhci-024",
+        "category": "uncertainty_calibration",
+        "domain": "financial_operations",
+        "choice": "Y",
+        "pass": true,
+        "input_digest": "786aab8bb47a056af074447d032cbc5c0b0aff25a14a68292e46df10ec9b6a13",
+        "criteria_digest": "fcce26487b993e0936a631d0f318de2e65d5fae523e50b19aa858a32785e391f",
+        "completion_digest": "ac2b8c4a7c58acdefce0e760fdf3bbbbaf0594266400599abee8e174536b9a38",
+        "completion_characters": 502,
+        "solver_status": "completed",
+        "solver_returned_model": "gpt-5.6-sol",
+        "solver_usage": {
+          "input_tokens": 156,
+          "output_tokens": 110,
+          "total_tokens": 266
+        },
+        "solver_latency_ms": 2671.279,
+        "grader_status": "completed",
+        "grader_returned_model": "gpt-5.6-sol",
+        "grader_usage": {
+          "input_tokens": 422,
+          "output_tokens": 5,
+          "total_tokens": 427
+        },
+        "grader_latency_ms": 1829.533
+      }
+    ]
+  },
+  "usage": {
+    "api_calls": 64,
+    "input_tokens": 18339,
+    "output_tokens": 3526,
+    "total_tokens": 21865,
+    "latency_ms": 148547
+  },
+  "claim_boundary": {
+    "single_run_only": true,
+    "same_model_self_grading": true,
+    "acheon_vs_baseline_comparison": false,
+    "general_model_improvement_claimed": false,
+    "raw_answer_quality_human_reviewed": false,
+    "suitable_for_paradigm_level_claim": false
+  },
+  "report_digest": "da85284481b36ff4875fafece727849f7cbd9fd7c07b856f47a5bf5413699def"
+}

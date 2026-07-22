@@ -15,7 +15,7 @@ build/
 !.env.example
 .codex-log/
 .DS_Store
-data/
+/data/
 *.db
 *.db-shm
 *.db-wal

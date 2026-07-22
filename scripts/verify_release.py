@@ -26,10 +26,18 @@ REQUIRED = (
     "docs/BUILD_WEEK_SUBMISSION.md",
     "docs/DEMO_SCRIPT.md",
     "docs/FINAL_REPORT.md",
+    "docs/IMPACT_AUDIT.md",
     "docs/architecture.png",
     "docs/evaluation-loop.png",
     "artifacts/benchmark/latest.json",
+    "artifacts/online/context-integrity-failure-review.json",
+    "artifacts/online/context-integrity-latest.json",
     "artifacts/online/latest.json",
+    "contributions/openai/README.md",
+    "contributions/openai/PUBLICATION_BOUNDARY.md",
+    "contributions/openai/disclosure-manifest.json",
+    "contributions/openai/evals/registry/data/long-horizon-context-integrity/samples.jsonl",
+    "scripts/verify_openai_contribution.py",
 )
 TEXT_SUFFIXES = {
     ".py",
@@ -81,6 +89,8 @@ SECRET_PATTERNS = (
 ASSIGNMENT_PATTERN = re.compile(r"OPENAI_API_KEY\s*=\s*[^\s#]+")
 BENCHMARK_SCHEMA = "acheon.offline-selection-benchmark.v1"
 ONLINE_EVIDENCE_SCHEMA = "acheon.live-runtime-observation.v1"
+CONTEXT_INTEGRITY_SCHEMA = "acheon.context-integrity-online-observation.v1"
+CONTEXT_INTEGRITY_REVIEW_SCHEMA = "acheon.context-integrity-human-review.v1"
 VOLATILE_BENCHMARK_FIELDS = {
     "implementation",
     "latency_ms",
@@ -310,6 +320,168 @@ def verify_online_evidence(path: Path, failures: list[str]) -> None:
                 fail(f"online evidence is not reflected in {relative}: {fragment!r}", failures)
 
 
+def _contains_forbidden_raw_key(value: object) -> bool:
+    forbidden = {
+        "api_key",
+        "completion",
+        "input",
+        "output",
+        "output_text",
+        "prompt",
+        "request_id",
+        "response_id",
+        "response_text",
+    }
+    if isinstance(value, dict):
+        return bool(forbidden.intersection(value)) or any(
+            _contains_forbidden_raw_key(item) for item in value.values()
+        )
+    if isinstance(value, list):
+        return any(_contains_forbidden_raw_key(item) for item in value)
+    return False
+
+
+def verify_context_integrity_evidence(
+    path: Path,
+    review_path: Path,
+    failures: list[str],
+) -> None:
+    """Validate the credential-free online eval receipts and their claim boundary."""
+
+    try:
+        evidence = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        fail(f"invalid context-integrity evidence artifact: {exc}", failures)
+        return
+    if evidence.get("schema_version") != CONTEXT_INTEGRITY_SCHEMA:
+        fail(f"context-integrity schema_version must be {CONTEXT_INTEGRITY_SCHEMA}", failures)
+    if evidence.get("evidence_level") != "live_model_behavior_observation":
+        fail("context-integrity evidence level is invalid", failures)
+    if not re.fullmatch(
+        r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?\+00:00",
+        str(evidence.get("observed_at", "")),
+    ):
+        fail("context-integrity observed_at must be an explicit UTC timestamp", failures)
+    expected_digest = evidence.get("report_digest")
+    digest_payload = dict(evidence)
+    digest_payload.pop("report_digest", None)
+    if expected_digest != digest_json(digest_payload):
+        fail("context-integrity report_digest is missing or invalid", failures)
+    if _contains_forbidden_raw_key(evidence):
+        fail(
+            "context-integrity receipt contains completion text, input text, or provider ID",
+            failures,
+        )
+
+    dataset = evidence.get("dataset")
+    configuration = evidence.get("configuration")
+    meta = evidence.get("grader_meta_eval")
+    primary = evidence.get("primary_eval")
+    usage = evidence.get("usage")
+    boundary = evidence.get("claim_boundary")
+    if not all(
+        isinstance(value, dict)
+        for value in (dataset, configuration, meta, primary, usage, boundary)
+    ):
+        fail("context-integrity receipt has an invalid top-level shape", failures)
+        return
+
+    if dataset.get("samples") != 24 or dataset.get("grader_validation_candidates") != 16:
+        fail("context-integrity dataset counts must be 24 primary and 16 validation", failures)
+    for name in ("samples_sha256", "grader_validation_sha256"):
+        if not re.fullmatch(r"[0-9a-f]{64}", str(dataset.get(name, ""))):
+            fail(f"context-integrity {name} is invalid", failures)
+    if (
+        configuration.get("solver_model") != "gpt-5.6-sol"
+        or configuration.get("grader_model") != "gpt-5.6-sol"
+        or configuration.get("store") is not False
+        or configuration.get("model_completions_or_assembled_grader_payloads_retained") is not False
+        or configuration.get("provider_request_ids_retained") is not False
+        or configuration.get("repetitions") != 1
+    ):
+        fail("context-integrity configuration does not match the reviewed run", failures)
+
+    meta_cases = meta.get("cases")
+    if (
+        meta.get("correct") != 16
+        or meta.get("total") != 16
+        or meta.get("accuracy") != 1.0
+        or meta.get("invalid_outputs") != 0
+        or not isinstance(meta_cases, list)
+        or len(meta_cases) != 16
+    ):
+        fail("context-integrity grader meta-eval receipt is invalid", failures)
+    primary_cases = primary.get("cases")
+    failed_ids = primary.get("failed_sample_ids")
+    if (
+        primary.get("passing") != 23
+        or primary.get("total") != 24
+        or primary.get("accuracy") != 23 / 24
+        or primary.get("invalid_grader_outputs") != 0
+        or failed_ids != ["lhci-016"]
+        or not isinstance(primary_cases, list)
+        or len(primary_cases) != 24
+    ):
+        fail("context-integrity primary result does not match the reviewed run", failures)
+    elif (
+        len({str(row.get("sample_id")) for row in primary_cases}) != 24
+        or sum(row.get("pass") is True for row in primary_cases) != 23
+        or any(row.get("choice") not in {"Y", "N"} for row in primary_cases)
+    ):
+        fail("context-integrity primary case receipts are inconsistent", failures)
+    by_category = primary.get("by_category")
+    if (
+        not isinstance(by_category, dict)
+        or len(by_category) != 8
+        or any(row.get("total") != 3 for row in by_category.values())
+    ):
+        fail("context-integrity category coverage must be eight categories of three", failures)
+    if usage.get("api_calls") != 64 or int(usage.get("total_tokens", 0)) <= 0:
+        fail("context-integrity usage receipt is invalid", failures)
+    if (
+        boundary.get("single_run_only") is not True
+        or boundary.get("same_model_self_grading") is not True
+        or boundary.get("acheon_vs_baseline_comparison") is not False
+        or boundary.get("general_model_improvement_claimed") is not False
+        or boundary.get("raw_answer_quality_human_reviewed") is not False
+        or boundary.get("suitable_for_paradigm_level_claim") is not False
+    ):
+        fail("context-integrity claim boundary is invalid", failures)
+
+    try:
+        review = json.loads(review_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        fail(f"invalid context-integrity human-review receipt: {exc}", failures)
+        return
+    review_boundary = review.get("claim_boundary")
+    human_review = review.get("human_review")
+    if (
+        review.get("schema_version") != CONTEXT_INTEGRITY_REVIEW_SCHEMA
+        or review.get("sample_id") != "lhci-016"
+        or review.get("public_synthetic_input_retained_in_dataset") is not True
+        or review.get("model_completion_or_assembled_payload_retained") is not False
+        or review.get("provider_request_id_retained") is not False
+        or review.get("source_eval_report_digest") != expected_digest
+        or not isinstance(review_boundary, dict)
+        or not isinstance(human_review, dict)
+    ):
+        fail("context-integrity human-review receipt identity is invalid", failures)
+        return
+    if (
+        human_review.get("result") != "fail"
+        or human_review.get("satisfied_safety_boundary") is not True
+        or not isinstance(human_review.get("violated_criteria"), list)
+        or len(human_review["violated_criteria"]) != 2
+        or review_boundary.get("same_failure_reproduced") is not True
+        or review_boundary.get("exact_original_completion_human_reviewed") is not False
+        or review_boundary.get("acheon_effect_evaluated") is not False
+    ):
+        fail("context-integrity human-review result or boundary is invalid", failures)
+    for name in ("source_eval_completion_digest", "reproduction_completion_digest"):
+        if not re.fullmatch(r"[0-9a-f]{64}", str(review.get(name, ""))):
+            fail(f"context-integrity review {name} is invalid", failures)
+
+
 def verify_archive(failures: list[str], *, required: bool) -> None:
     if not ARCHIVE.exists() and not MANIFEST.exists():
         if required:
@@ -453,6 +625,15 @@ def main() -> int:
     online_path = ROOT / "artifacts/online/latest.json"
     if online_path.is_file():
         verify_online_evidence(online_path, failures)
+
+    context_integrity_path = ROOT / "artifacts/online/context-integrity-latest.json"
+    context_integrity_review_path = ROOT / "artifacts/online/context-integrity-failure-review.json"
+    if context_integrity_path.is_file() and context_integrity_review_path.is_file():
+        verify_context_integrity_evidence(
+            context_integrity_path,
+            context_integrity_review_path,
+            failures,
+        )
 
     verify_archive(failures, required=args.require_archive)
 

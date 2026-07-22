@@ -24,6 +24,8 @@ EXACT_PATHS = (
     "SECURITY.md",
     "THIRD_PARTY_NOTICES.md",
     "artifacts/benchmark/latest.json",
+    "artifacts/online/context-integrity-failure-review.json",
+    "artifacts/online/context-integrity-latest.json",
     "artifacts/online/latest.json",
     "docs/ARCHITECTURE.md",
     "docs/BUILD_WEEK_SUBMISSION.md",
@@ -31,6 +33,7 @@ EXACT_PATHS = (
     "docs/DEMO_SCRIPT.md",
     "docs/EVALUATION.md",
     "docs/FINAL_REPORT.md",
+    "docs/IMPACT_AUDIT.md",
     "docs/LIMITATIONS.md",
     "docs/OPENAI_INTEGRATION.md",
     "docs/RELEASE_CHECKLIST.md",
@@ -42,11 +45,14 @@ EXACT_PATHS = (
     "pyproject.toml",
     "scripts/build_release.py",
     "scripts/generate_diagrams.py",
+    "scripts/run_openai_context_integrity_eval.py",
+    "scripts/verify_openai_contribution.py",
     "scripts/verify_release.py",
     "src/acheon/py.typed",
     "uv.lock",
 )
 TREE_RULES = {
+    "contributions/openai": {".json", ".jsonl", ".md", ".txt", ".yaml", ".yml"},
     "src/acheon": {".py", ".html", ".css", ".js"},
     "tests": {".py"},
 }

@@ -1,0 +1,9 @@
+Requires Python 3.11 or newer. Download acheon_context-0.1.0-py3-none-any.whl
+from the public v0.1.0 release, then run:
+
+python -m pip install acheon_context-0.1.0-py3-none-any.whl
+acheon demo
+acheon serve --port 8000
+
+Open http://127.0.0.1:8000. The default local demo requires no API key, model
+download, JavaScript build, or network connection.

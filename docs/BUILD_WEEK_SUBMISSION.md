@@ -1,5 +1,8 @@
 # Build Week submission draft
 
+> **Archived, not submitted.** The challenge closed on 2026-07-21 at 17:00 PDT.
+> This draft is retained as build provenance and is not an active or late entry.
+
 ## Category
 
 Developer Tools
@@ -95,9 +98,9 @@ improvement.
 
 - Repository URL: `https://github.com/xingfengcan-tech/acheon-context`
 - Demo URL or test path: prebuilt `v0.1.0` wheel plus local `acheon demo` / `acheon serve`
-- Public/unlisted YouTube URL under three minutes: `PENDING`
+- Public/unlisted YouTube URL under three minutes: `NOT PROVIDED — no submission`
 - Codex primary task/session ID: `019f7787-780d-7e62-8918-56173a220195`
-- Team members and legal eligibility: `PENDING`
+- Team members and legal eligibility: `NOT ATTESTED — no submission`
 - Live GPT-5.6 artifact: `artifacts/online/latest.json` (single-run smoke-test scope)
 
 Official requirements: [Devpost challenge](https://openai.devpost.com/),

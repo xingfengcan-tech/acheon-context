@@ -1,0 +1,3 @@
+A four-stage Acheon architecture diagram showing typed, versioned memory records
+passing through lifecycle and scope gates, deterministic budgeted selection, a
+canonical context packet, and an optional OpenAI Responses API boundary.
