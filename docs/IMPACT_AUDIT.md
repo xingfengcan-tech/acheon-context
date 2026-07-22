@@ -44,8 +44,9 @@ As of 2026-07-22:
 - one GPT-5.6 Sol Responses API smoke test completed and captured a provider
   receipt without publishing the answer text or private payload.
 - one separate 24-sample GPT-5.6 Sol context-integrity run recorded 16/16 agreement
-  on labeled grader checks, 23/24 automated passes, no invalid grader output, and
-  one human-reproduced omission of required traceability details.
+  with provisional grader labels, 23/24 automated passes, no invalid grader output,
+  and one agent-reviewed reproduction of an omitted traceability detail; item-level
+  independent human review of the candidate eval is pending.
 
 ## What the evidence does not establish
 

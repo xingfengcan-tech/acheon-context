@@ -14,6 +14,7 @@ MANIFEST = DIST / "acheon-build-week.manifest.json"
 
 EXACT_PATHS = (
     ".env.example",
+    ".gitattributes",
     ".github/workflows/ci.yml",
     ".gitignore",
     "AGENTS.md",

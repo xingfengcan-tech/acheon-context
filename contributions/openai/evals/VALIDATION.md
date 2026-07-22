@@ -21,14 +21,35 @@ Core file digests at preparation time:
 ```text
 e11ee0b0011c9c65939a10d1aaf17419d203b806061b4a0d9db6e8a395d2ad45  registry/data/long-horizon-context-integrity/samples.jsonl
 162ab04a0e00fe1b278cb5c5950953de4d95e50b6b36e058eef2eb3c6ceeaf4d  registry/data/long-horizon-context-integrity/grader_validation.jsonl
-6bf7c340baf7463ef1903696f0995b70514ef05cb0b04493cb5041ca19cc42f4  registry/evals/long-horizon-context-integrity.yaml
+55e8d5906001aefcaa4dbc6e7a912bb2925849620e12a3ff0465ae9b3561a397  registry/evals/long-horizon-context-integrity.yaml
 2118836337bd4e730e82bc24c6f9ca547ca4ea9fb7964ea325987ddd676cf5d2  registry/modelgraded/long-horizon-context-integrity.yaml
 ```
 
 Both YAML files were also parsed successfully with PyYAML 6.0.3 in an isolated
-validation environment. Resolving the aliases through the upstream registry and
-running the eval remain pre-submission gates because they depend on an upstream
-checkout and an explicitly selected solver.
+validation environment. Final local-upstream staging and dummy smoke results are
+recorded below. A real run still depends on an explicitly selected and supported
+solver.
+
+## Recorded upstream staging receipt
+
+On 2026-07-22, the final four files were normalized to UTF-8 without BOM and LF,
+then copied into a local checkout of `openai/evals` commit
+`8eac7a7de5215c907fbddc30efdaf316913eccdd`.
+
+```text
+PASS jsonl_parse=40/40 primary=24 validation=16
+PASS upstream_registry_yaml=483_files aliases=2/2 class_and_paths=true
+PASS git_lfs=jsonl_2/2 gitattributes_diff=empty cached_diff_check=true
+PASS oaieval_dummy_primary=24/24 exit=0
+PASS oaieval_dummy_meta=16/16 exit=0
+```
+
+The dummy completion function intentionally produced invalid answers and zero
+accuracy. This smoke receipt proves only loading, Registry resolution, templating,
+and complete traversal; it is not model-performance evidence. The Windows-local
+smoke used Python 3.11, Evals 3.0.1.post1, PyYAML 6.0.3, and `blobfile==2.1.1`
+because blobfile 3.2.0 did not accept the local Windows paths produced by this
+upstream revision. No real model request was made.
 
 ## Repeat the JSONL checks
 
@@ -88,37 +109,45 @@ python -c "from pathlib import Path; import yaml; paths=list(Path('evals/registr
 ```
 
 Then confirm that the eval registry can resolve both aliases using the upstream
-project's normal test or listing command before running a solver.
+project's normal test or listing command before running a solver. This passed in
+the recorded temporary checkout and must be repeated in the formal contribution
+branch.
 
 ## Verify Git LFS
 
-The current upstream PR template requires Eval JSON data to use Git LFS. After
-copying into the fork:
+The current upstream repository already assigns Eval JSONL data to Git LFS. First
+normalize the four contribution files to UTF-8 without BOM and LF line endings;
+then verify the existing attributes after copying into the fork:
 
 ```bash
 git lfs install
-git lfs track "evals/registry/data/long-horizon-context-integrity/*.jsonl"
-git add .gitattributes evals/registry/data/long-horizon-context-integrity
-git check-attr filter -- evals/registry/data/long-horizon-context-integrity/*.jsonl
-git lfs ls-files
+git check-attr filter diff merge text -- evals/registry/data/long-horizon-context-integrity/*.jsonl
+git add evals/registry/data/long-horizon-context-integrity \
+  evals/registry/evals/long-horizon-context-integrity.yaml \
+  evals/registry/modelgraded/long-horizon-context-integrity.yaml
+git lfs ls-files -l
+git diff --cached -- .gitattributes
 ```
 
-Both JSONL paths must report `filter: lfs` and appear in `git lfs ls-files`.
+Both JSONL paths must report `filter: lfs` and appear in `git lfs ls-files`; the
+staged `.gitattributes` diff must remain empty. Only add a rule when the upstream
+attribute is absent.
 
 ## Model and grader verification gate
 
 Structural validation does not measure model behavior. A preliminary direct
 Responses API run used GPT-5.6 Sol for both answer generation and grading with
-`store=false`: the labeled grader meta-eval was 16/16, and the primary result was
-23/24 with no invalid grader outputs. The only automated failure was `lhci-016`; a
-separate human-inspected reproduction omitted required version and issue-ID details.
+`store=false`: agreement with provisional meta-eval labels was 16/16, and the
+primary result was 23/24 with no invalid grader outputs. The only automated failure
+was `lhci-016`; a
+separate targeted reproduction check omitted required version and issue-ID details.
 Public synthetic inputs are retained in the Eval dataset. Model completion text,
 assembled grader payloads, and provider request IDs were not retained. See the aggregate receipt at
-`artifacts/online/context-integrity-latest.json` and the narrow human-review receipt
+`artifacts/online/context-integrity-latest.json` and the narrow agent-review receipt
 at `artifacts/online/context-integrity-failure-review.json` in the Acheon repository.
 
 Before an external PR, repeat both aliases in an upstream checkout with a currently
-supported solver:
+supported real solver; the completed dummy smoke does not satisfy this gate:
 
 ```bash
 oaieval <solver> long-horizon-context-integrity

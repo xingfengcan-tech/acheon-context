@@ -1,14 +1,16 @@
 # Long-Horizon Context Integrity eval contribution package
 
-This directory is a PR-ready staging package for the public
+This directory is a pre-submission staging package for the public
 [`openai/evals`](https://github.com/openai/evals) registry. It evaluates an
 observable model behavior: reconstructing the current, authorized, scoped, and
 supportable answer from a long chronological record.
 
 The package contains no custom Python eval class and performs no API calls. It uses
 the existing `ModelBasedClassify` class, one declarative registry file, one
-declarative model-graded rubric, 24 hand-authored task samples, and 16
-human-labeled grader-validation candidates.
+declarative model-graded rubric, 24 project-specific synthetic task samples primarily
+drafted and checked by Codex/model agents, and 16 provisionally labeled
+grader-validation candidates. No item-level independent human review has been
+completed.
 
 ## Files
 
@@ -37,9 +39,9 @@ evals/registry/modelgraded/long-horizon-context-integrity.yaml
 
 - `long-horizon-context-integrity` runs the 24 primary samples.
 - `long-horizon-context-integrity-meta` runs 16 positive/negative candidate
-  answers with human `choice` labels to validate the rubric.
+  answers with provisional `choice` labels to exercise the rubric.
 - Each primary sample has chat-formatted `input`, an exhaustive `criteria` field,
-  and a human-authored `ideal` answer for audit and spot checking.
+  and a reference `ideal` answer for audit and spot checking.
 - The rubric returns `Y` only when every material criterion is satisfied.
 
 The cases cover eight behavior families with three primary examples each:
@@ -66,16 +68,30 @@ evals, permits custom model-graded YAML, requires at least 15 high-quality sampl
 and asks for JSON data to be stored with Git LFS. This package supplies 24 samples
 and adds no executable eval implementation.
 
-After copying into an upstream fork, verify Git LFS before committing:
+On 2026-07-22, the final four files were copied into a local checkout of upstream
+commit `8eac7a7de5215c907fbddc30efdaf316913eccdd`. Full Registry parsing succeeded,
+both aliases resolved, Git LFS OIDs matched the LF-normalized hashes, and complete
+`oaieval dummy` smoke runs traversed 24 primary plus 16 meta samples with exit code
+zero. Dummy outputs are intentionally invalid and provide no model-performance
+evidence. A real run with an upstream-supported model remains pending.
+
+The upstream repository already defines the JSONL Git LFS attribute. After copying
+and normalizing all four files to UTF-8 without BOM and LF line endings, verify the
+existing attribute before committing:
 
 ```bash
 git lfs install
-git lfs track "evals/registry/data/long-horizon-context-integrity/*.jsonl"
-git add .gitattributes evals/registry/data/long-horizon-context-integrity
-git check-attr filter -- evals/registry/data/long-horizon-context-integrity/*.jsonl
+git check-attr filter diff merge text -- evals/registry/data/long-horizon-context-integrity/*.jsonl
+git add evals/registry/data/long-horizon-context-integrity \
+  evals/registry/evals/long-horizon-context-integrity.yaml \
+  evals/registry/modelgraded/long-horizon-context-integrity.yaml
+git lfs ls-files -l
+git diff --cached -- .gitattributes
 ```
 
-Expected `filter` value: `lfs`.
+Expected: both JSONL paths report `filter: lfs`, appear in `git lfs ls-files`, and
+the staged `.gitattributes` diff is empty. Only add a new LFS rule if the upstream
+attribute is actually absent.
 
 ## Structural verification
 
@@ -104,13 +120,20 @@ model-performance evidence.
 
 ## Publication boundary
 
-All scenarios are fictional and hand-authored. They contain no raw user
-conversations, credentials, personal data, provider request identifiers, private
-design notes, or claims that a model's weights, native context window, or permanent
-memory changed. The contribution specifies behavior and evaluation criteria only;
-it does not disclose a private derivation or implementation recipe.
+The project-specific fictional scenarios were primarily drafted and checked by
+Codex/model agents. Automated scans found no raw user conversations, credentials,
+personal data, provider request identifiers, private design notes, or claims that a
+model's weights, native context window, or permanent memory changed. Independent
+human rights and privacy review is pending. The contribution specifies behavior
+and evaluation criteria only; it does not disclose a private derivation or
+implementation recipe.
 
 By contributing these files upstream, the contributor would agree to the upstream
 MIT license terms and permit OpenAI to use the data for future service
 improvements. Those legal and publication decisions are intentionally left for the
 human contributor; this package has not been submitted externally.
+
+Before an upstream pull request, an independent human must review all 24 task
+records, criteria, and reference answers plus all 16 candidate answers and
+provisional labels. Until that receipt exists, the package must not claim human
+authorship, human labeling, or completed human review.

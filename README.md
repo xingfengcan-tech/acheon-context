@@ -115,20 +115,24 @@ raw-versus-Acheon comparison or evidence of general answer-quality improvement.
 
 A separate aggregate receipt at
 [`artifacts/online/context-integrity-latest.json`](artifacts/online/context-integrity-latest.json)
-records one GPT-5.6 Sol run over 24 hand-authored context-integrity cases: 16/16
-labeled grader checks and 23/24 automated primary passes, with no invalid grader
-outputs. A separately inspected reproduction of `lhci-016` omitted two required
-traceability details. This run did not include an Acheon condition, used the same
-model for answers and grading, retained no raw outputs, and had one repetition. It
-supports the public Eval's usefulness, not a claim that Acheon improved the model.
+records one GPT-5.6 Sol run over 24 project-specific synthetic context-integrity cases
+primarily drafted and checked by Codex/model agents: 16/16 agreement with
+provisional grader labels and 23/24
+automated primary passes, with no invalid grader outputs. A targeted reproduction
+check of `lhci-016` omitted two required traceability details. The labels and
+reference answers have not yet received independent human review. This run did not
+include an Acheon condition, used the same model for answers and grading, retained
+no raw outputs, and had one repetition. It supports further evaluation of the
+public Eval, not a claim that Acheon improved the model.
 
 ## Reproduce the evaluation
 
 ```powershell
 .venv\Scripts\python -m unittest discover -s tests -v
-.venv\Scripts\python -m acheon.evals.run --output artifacts/benchmark/latest.json
+$benchmarkCheck = Join-Path $env:TEMP "acheon-benchmark-check.json"
+.venv\Scripts\python -m acheon.evals.run --output $benchmarkCheck
 .venv\Scripts\python scripts/verify_openai_contribution.py
-.venv\Scripts\python scripts/verify_release.py
+.venv\Scripts\python scripts/verify_release.py --compare-benchmark $benchmarkCheck
 ```
 
 The offline suite compares Acheon with chronological-prefix, recent-tail, and

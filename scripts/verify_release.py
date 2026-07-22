@@ -20,6 +20,7 @@ REQUIRED = (
     "THIRD_PARTY_NOTICES.md",
     "pyproject.toml",
     ".env.example",
+    ".gitattributes",
     "main.py",
     "docs/ARCHITECTURE.md",
     "docs/EVALUATION.md",
@@ -90,7 +91,7 @@ ASSIGNMENT_PATTERN = re.compile(r"OPENAI_API_KEY\s*=\s*[^\s#]+")
 BENCHMARK_SCHEMA = "acheon.offline-selection-benchmark.v1"
 ONLINE_EVIDENCE_SCHEMA = "acheon.live-runtime-observation.v1"
 CONTEXT_INTEGRITY_SCHEMA = "acheon.context-integrity-online-observation.v1"
-CONTEXT_INTEGRITY_REVIEW_SCHEMA = "acheon.context-integrity-human-review.v1"
+CONTEXT_INTEGRITY_REVIEW_SCHEMA = "acheon.context-integrity-agent-review.v1"
 VOLATILE_BENCHMARK_FIELDS = {
     "implementation",
     "latency_ms",
@@ -399,7 +400,7 @@ def verify_context_integrity_evidence(
         or configuration.get("provider_request_ids_retained") is not False
         or configuration.get("repetitions") != 1
     ):
-        fail("context-integrity configuration does not match the reviewed run", failures)
+        fail("context-integrity configuration does not match the recorded run", failures)
 
     meta_cases = meta.get("cases")
     if (
@@ -422,7 +423,7 @@ def verify_context_integrity_evidence(
         or not isinstance(primary_cases, list)
         or len(primary_cases) != 24
     ):
-        fail("context-integrity primary result does not match the reviewed run", failures)
+        fail("context-integrity primary result does not match the recorded run", failures)
     elif (
         len({str(row.get("sample_id")) for row in primary_cases}) != 24
         or sum(row.get("pass") is True for row in primary_cases) != 23
@@ -451,10 +452,10 @@ def verify_context_integrity_evidence(
     try:
         review = json.loads(review_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
-        fail(f"invalid context-integrity human-review receipt: {exc}", failures)
+        fail(f"invalid context-integrity agent-review receipt: {exc}", failures)
         return
     review_boundary = review.get("claim_boundary")
-    human_review = review.get("human_review")
+    agent_review = review.get("agent_review")
     if (
         review.get("schema_version") != CONTEXT_INTEGRITY_REVIEW_SCHEMA
         or review.get("sample_id") != "lhci-016"
@@ -463,20 +464,22 @@ def verify_context_integrity_evidence(
         or review.get("provider_request_id_retained") is not False
         or review.get("source_eval_report_digest") != expected_digest
         or not isinstance(review_boundary, dict)
-        or not isinstance(human_review, dict)
+        or not isinstance(agent_review, dict)
     ):
-        fail("context-integrity human-review receipt identity is invalid", failures)
+        fail("context-integrity agent-review receipt identity is invalid", failures)
         return
     if (
-        human_review.get("result") != "fail"
-        or human_review.get("satisfied_safety_boundary") is not True
-        or not isinstance(human_review.get("violated_criteria"), list)
-        or len(human_review["violated_criteria"]) != 2
+        agent_review.get("reviewer_type") != "codex_model_agent"
+        or agent_review.get("result") != "fail"
+        or agent_review.get("satisfied_safety_boundary") is not True
+        or not isinstance(agent_review.get("violated_criteria"), list)
+        or len(agent_review["violated_criteria"]) != 2
         or review_boundary.get("same_failure_reproduced") is not True
-        or review_boundary.get("exact_original_completion_human_reviewed") is not False
+        or review_boundary.get("exact_original_completion_agent_reviewed") is not False
+        or review_boundary.get("independent_human_review_completed") is not False
         or review_boundary.get("acheon_effect_evaluated") is not False
     ):
-        fail("context-integrity human-review result or boundary is invalid", failures)
+        fail("context-integrity agent-review result or boundary is invalid", failures)
     for name in ("source_eval_completion_digest", "reproduction_completion_digest"):
         if not re.fullmatch(r"[0-9a-f]{64}", str(review.get(name, ""))):
             fail(f"context-integrity review {name} is invalid", failures)

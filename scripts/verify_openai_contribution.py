@@ -36,6 +36,7 @@ AUTHOR_NAME_LIMIT = 500
 
 REQUIRED_FILES = {
     "README.md",
+    "OFFICIAL_PATH_DECISION.md",
     "PUBLICATION_BOUNDARY.md",
     "disclosure-manifest.json",
     "showcase/fields.en.json",
@@ -81,6 +82,7 @@ REQUIRED_GATES = {
     "rights_and_authority_attestation",
     "showcase_program_agreement",
     "open_source_eval_data_license_confirmation",
+    "independent_human_eval_item_review",
     "community_account_identity",
     "organization_level_data_sharing_choice",
 }

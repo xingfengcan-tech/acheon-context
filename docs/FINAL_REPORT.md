@@ -31,8 +31,8 @@ The public package contains:
   receipt fields;
 - three equal-budget controls, six single-feature ablations, 2,000-sample paired
   bootstrap intervals, per-case results, and every structured failure;
-- a 24-sample, eight-category OpenAI Evals proposal with 16 labeled grader checks
-  and a credential-free aggregate online receipt;
+- a 24-sample, eight-category OpenAI Evals proposal with 16 provisional grader
+  labels and a credential-free aggregate online receipt;
 - CI, diagrams, security guidance, a submission draft, a narrated demo script, and
   an allowlisted deterministic release archive builder.
 
@@ -119,15 +119,17 @@ This observation proves that the compiled packet reached the intended model and
 that the adapter captured a provider receipt. It is one smoke test, not a
 same-model raw-versus-Acheon experiment.
 
-A separate direct Responses API run evaluated GPT-5.6 Sol on the 24 hand-authored
-Long-Horizon Context Integrity cases. The same model generated and graded answers;
-the labeled grader meta-eval was 16/16, and the primary automated result was 23/24
-with no invalid grader output. `lhci-016` was the only failure. A separate
-human-inspected reproduction remained safe and useful but omitted the required
-version `6.2.1` and issue identifier `BUG-731`, confirming the eval captures a real
-traceability omission. The public synthetic inputs are retained in the Eval dataset;
-model completion text, assembled grader payloads, and provider request IDs were not
-retained.
+A separate direct Responses API run evaluated GPT-5.6 Sol on 24 project-specific synthetic
+Long-Horizon Context Integrity cases primarily drafted and checked by Codex/model
+agents. The same model generated and graded answers; agreement with the provisional
+grader labels was 16/16, and the primary automated result was 23/24 with no invalid
+grader output.
+`lhci-016` was the only failure. A targeted reproduction check remained safe and
+useful but omitted the required version `6.2.1` and issue identifier `BUG-731`,
+showing that the candidate eval can detect a traceability omission. This check was
+agent-reviewed, not independently human-reviewed. The public synthetic inputs are
+retained in the Eval dataset; model completion text, assembled grader payloads, and
+provider request IDs were not retained.
 
 This standalone run does not contain an Acheon condition, uses one repetition and
 a same-model grader, and does not preserve the original failed answer for human
@@ -174,17 +176,18 @@ remain operator decisions rather than fabricated automation.
   `artifacts/online/context-integrity-latest.json`
 - Context-integrity report digest:
   `da85284481b36ff4875fafece727849f7cbd9fd7c07b856f47a5bf5413699def`
-- Human-reviewed failure reproduction:
+- Targeted failure-reproduction receipt:
   `artifacts/online/context-integrity-failure-review.json`
 
 Run from the repository root:
 
 ```powershell
 python -m unittest discover -s tests -v
-python -m acheon.evals.run --output artifacts/benchmark/latest.json
+$benchmarkCheck = Join-Path $env:TEMP "acheon-benchmark-check.json"
+python -m acheon.evals.run --output $benchmarkCheck
 python scripts/generate_diagrams.py
 python scripts/verify_openai_contribution.py
-python scripts/verify_release.py
+python scripts/verify_release.py --compare-benchmark $benchmarkCheck
 python scripts/build_release.py
 python scripts/verify_release.py --require-archive
 ```
@@ -197,5 +200,7 @@ or provider request IDs.
 
 Timing and the top-level report digest change across hosts because timing is part of
 the report; selected IDs, absolute selection metrics, workload digest, and
-configuration digest are deterministic for the fixed release input.
+configuration digest are deterministic for the fixed release input. The verification
+workflow therefore writes a fresh report to a temporary path and compares only the
+declared stable fields with the checked-in receipt.
 

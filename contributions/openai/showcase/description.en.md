@@ -31,7 +31,8 @@ potential, not an Acheon-attributable answer-quality improvement.
 The checked-in benchmark measures record-selection contracts on a disclosed
 synthetic generator. The one live API-path receipt proves the adapter completed. A
 separate, single-run GPT-5.6 Sol context-integrity observation recorded 23/24
-automated passes with a validated same-model grader and one human-reproduced
-traceability omission. Neither is a raw-versus-Acheon comparison. The project
-publishes these limitations so reviewers can reproduce exactly what is and is not
-established.
+automated passes with a same-model grader and one targeted reproduction of a
+traceability omission. The provisional labels and reference answers were primarily
+drafted and checked by Codex/model agents; item-level independent human review is
+pending. Neither is a raw-versus-Acheon comparison. The project publishes these
+limitations so reviewers can reproduce exactly what is and is not established.
