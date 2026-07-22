@@ -1,0 +1,29 @@
+long-horizon-context-integrity:
+  id: long-horizon-context-integrity.dev.v0
+  description: >-
+    Evaluates whether a model reconstructs current, scoped, and auditable operating
+    context from long chronological records without reviving obsolete facts,
+    hiding conflicts, following untrusted content, or inventing missing evidence.
+  metrics: [accuracy]
+
+long-horizon-context-integrity.dev.v0:
+  class: evals.elsuite.modelgraded.classify:ModelBasedClassify
+  args:
+    samples_jsonl: long-horizon-context-integrity/samples.jsonl
+    eval_type: cot_classify
+    modelgraded_spec: long-horizon-context-integrity
+
+long-horizon-context-integrity-meta:
+  id: long-horizon-context-integrity-meta.dev.v0
+  description: >-
+    Meta-evaluates the long-horizon context-integrity grader against human-labeled
+    passing and failing candidate answers.
+  metrics: [accuracy]
+
+long-horizon-context-integrity-meta.dev.v0:
+  class: evals.elsuite.modelgraded.classify:ModelBasedClassify
+  args:
+    samples_jsonl: long-horizon-context-integrity/grader_validation.jsonl
+    eval_type: cot_classify
+    modelgraded_spec: long-horizon-context-integrity
+    metaeval: true

@@ -2,15 +2,16 @@
 
 ## Executive outcome
 
-Acheon is a release-candidate Developer Tools project for OpenAI Build Week. It
-implements a deterministic application-layer context compiler, versioned selective
-memory store, inspectable selection trace, offline web demo, optional GPT-5.6 Sol
-Responses API boundary, and a reproducible evaluation package.
+Acheon is a release-ready open-source research alpha for deterministic application-
+layer context governance. It includes a versioned selective-memory store,
+inspectable selection trace, offline web demo, optional GPT-5.6 Sol Responses API
+boundary, and reproducible offline and model-behavior evaluation packages.
 
-The automated offline scope is complete, and one credentialed GPT-5.6 Sol smoke
-test completed over public demo data. The source repository and release artifacts
-are public. Legal eligibility confirmation, final Devpost submission, and YouTube
-upload remain operator-gated steps and were not fabricated or bypassed.
+The automated offline scope is complete. One credentialed GPT-5.6 Sol adapter smoke
+test and one standalone 24-sample context-integrity observation completed over
+public synthetic data. The 2026 OpenAI Build Week deadline passed before submission,
+so the project is not represented as prize-eligible; the active handoff instead
+targets OpenAI Showcase, OpenAI Evals, and Developer Community review.
 
 ## Delivered system
 
@@ -30,6 +31,8 @@ The public package contains:
   receipt fields;
 - three equal-budget controls, six single-feature ablations, 2,000-sample paired
   bootstrap intervals, per-case results, and every structured failure;
+- a 24-sample, eight-category OpenAI Evals proposal with 16 labeled grader checks
+  and a credential-free aggregate online receipt;
 - CI, diagrams, security guidance, a submission draft, a narrated demo script, and
   an allowlisted deterministic release archive builder.
 
@@ -114,33 +117,46 @@ IDs, packet digest, six selected record IDs, timestamp, and no failure.
 
 This observation proves that the compiled packet reached the intended model and
 that the adapter captured a provider receipt. It is one smoke test, not a
-same-model raw-versus-Acheon experiment. Downstream answer-quality improvement,
-real-workload generalization, expanded native context, and permanent model memory
-remain **not evaluated**.
+same-model raw-versus-Acheon experiment.
+
+A separate direct Responses API run evaluated GPT-5.6 Sol on the 24 hand-authored
+Long-Horizon Context Integrity cases. The same model generated and graded answers;
+the labeled grader meta-eval was 16/16, and the primary automated result was 23/24
+with no invalid grader output. `lhci-016` was the only failure. A separate
+human-inspected reproduction remained safe and useful but omitted the required
+version `6.2.1` and issue identifier `BUG-731`, confirming the eval captures a real
+traceability omission. The public synthetic inputs are retained in the Eval dataset;
+model completion text, assembled grader payloads, and provider request IDs were not
+retained.
+
+This standalone run does not contain an Acheon condition, uses one repetition and
+a same-model grader, and does not preserve the original failed answer for human
+inspection. It therefore supports the usefulness of the public Eval, not an
+Acheon-attributable downstream improvement. Real-workload generalization, expanded
+native context, and permanent model memory remain **not evaluated**.
 
 ## Claim decision
 
 The project demonstrates a large improvement over three simple controls on its
-disclosed synthetic selection workload. It does **not** establish a universal,
-paradigm-level, or model-internal improvement. Confirming that stronger claim would
-require credentialed same-model answer evaluations, unseen real workloads,
-independent replication, and outcome metrics beyond record selection.
+disclosed synthetic selection workload and supplies one observed model-behavior
+failure for a separate public Eval. It does **not** establish an Acheon-attributable,
+universal, paradigm-level, or model-internal improvement. Confirming that stronger
+claim requires same-model equal-token Acheon-versus-baseline evaluations, unseen
+real workloads, independent replication, and outcome metrics beyond record
+selection.
 
-## Build Week handoff
+## OpenAI contribution handoff
 
-The best-fit category is **Developer Tools**. The English submission copy, demo
-script, Codex-use record, architecture, methodology, limitations, and release
-checklist are included. Remaining operator fields are marked `PENDING` rather than
-invented.
+OpenAI Build Week closed on **2026-07-21 17:00 PDT** and the Devpost challenge is in
+judging. Acheon was not submitted before the deadline, and no late-submission claim
+is made. The historical Build Week draft and demo script remain as provenance.
 
-The reviewed publication boundary is the allowlisted ZIP, not this development
-repository's existing Git metadata. Create a fresh submission repository from the
-archive; do not mirror or `push --all` the development repository.
-
-Before submission, the operator must confirm legal eligibility, verify the recorded
-Codex session ID, record and publish the prepared narrated YouTube demo under three
-minutes, test all judge-access paths, and
-submit before **2026-07-21 17:00 PDT / 2026-07-22 08:00 Asia/Shanghai**.
+The active, reviewed package is `contributions/openai/`: Showcase field copy,
+OpenAI Evals registry files, a Developer Community post, eight sanitized feedback
+cases, a publication boundary, and fail-closed validation. Identity, authorship and
+content rights, program-agreement acceptance, eval-data licensing, community
+account identity, organization data-sharing choices, and final external submission
+remain operator decisions rather than fabricated automation.
 
 ## Reproduction receipts
 
@@ -154,6 +170,12 @@ submit before **2026-07-21 17:00 PDT / 2026-07-22 08:00 Asia/Shanghai**.
 - Live runtime receipt: `artifacts/online/latest.json`
 - Live packet digest:
   `bb085270c45cdb5f378c7ce2233c243eca74b1b8bb6f6312f57757f3a52f934c`
+- Context-integrity online receipt:
+  `artifacts/online/context-integrity-latest.json`
+- Context-integrity report digest:
+  `da85284481b36ff4875fafece727849f7cbd9fd7c07b856f47a5bf5413699def`
+- Human-reviewed failure reproduction:
+  `artifacts/online/context-integrity-failure-review.json`
 
 Run from the repository root:
 
@@ -161,10 +183,17 @@ Run from the repository root:
 python -m unittest discover -s tests -v
 python -m acheon.evals.run --output artifacts/benchmark/latest.json
 python scripts/generate_diagrams.py
+python scripts/verify_openai_contribution.py
 python scripts/verify_release.py
 python scripts/build_release.py
 python scripts/verify_release.py --require-archive
 ```
+
+The optional paid online observation is reproduced separately with
+`python scripts/run_openai_context_integrity_eval.py`; it reads an already approved
+local credential and uses `store=false`. Public synthetic inputs remain in the
+dataset; the script does not write model completion text, assembled grader payloads,
+or provider request IDs.
 
 Timing and the top-level report digest change across hosts because timing is part of
 the report; selected IDs, absolute selection metrics, workload digest, and

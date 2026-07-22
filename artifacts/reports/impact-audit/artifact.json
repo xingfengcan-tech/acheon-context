@@ -1,0 +1,457 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Acheon impact and evidence audit",
+    "description": "A technical decision report on Acheon's current evidence and long-term impact potential.",
+    "generatedAt": "2026-07-22T08:30:00+08:00",
+    "filters": [],
+    "cards": [
+      {
+        "id": "tests_card",
+        "description": "Unit and integration contracts passing in the final local verification run.",
+        "dataset": "engineering_status",
+        "sourceId": "test_evidence",
+        "metrics": [
+          {
+            "label": "Passing tests",
+            "field": "passing_tests",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "cases_card",
+        "description": "Fixed-seed synthetic record-selection cases in the public benchmark.",
+        "dataset": "benchmark_status",
+        "sourceId": "case_count_evidence",
+        "metrics": [
+          {
+            "label": "Synthetic cases",
+            "field": "case_count",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "comparative_runs_card",
+        "description": "Same-model raw-versus-Acheon answer-quality runs currently published.",
+        "dataset": "live_evidence_status",
+        "sourceId": "live_evidence",
+        "metrics": [
+          {
+            "label": "Comparative live runs",
+            "field": "comparative_runs",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "replication_card",
+        "description": "Independent replications or real external pilots currently documented.",
+        "dataset": "impact_status",
+        "sourceId": "replication_evidence",
+        "metrics": [
+          {
+            "label": "Independent replications",
+            "field": "replications",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "benchmark_recall_chart",
+        "title": "Recall@budget on the disclosed synthetic workload",
+        "subtitle": "240 fixed-seed cases under one estimated-unit budget; this is not model-answer quality.",
+        "type": "bar",
+        "dataset": "benchmark_results",
+        "sourceId": "benchmark_extract",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "system",
+            "type": "nominal",
+            "label": "System"
+          },
+          "y": {
+            "field": "recall",
+            "type": "quantitative",
+            "label": "Recall@budget"
+          },
+          "tooltip": [
+            {
+              "field": "precision",
+              "type": "quantitative",
+              "label": "Precision",
+              "format": "percent"
+            },
+            {
+              "field": "forbidden_case_rate",
+              "type": "quantitative",
+              "label": "Forbidden inclusion",
+              "format": "percent"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "benchmark_table",
+        "title": "Synthetic equal-budget selection results",
+        "subtitle": "240 fixed-seed cases; exact rates on the disclosed generator, not model-answer quality.",
+        "dataset": "benchmark_results",
+        "sourceId": "benchmark_extract",
+        "defaultSort": {
+          "field": "recall",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "system",
+            "label": "System",
+            "type": "text"
+          },
+          {
+            "field": "recall",
+            "label": "Recall@budget",
+            "format": "percent"
+          },
+          {
+            "field": "precision",
+            "label": "Precision",
+            "format": "percent"
+          },
+          {
+            "field": "forbidden_case_rate",
+            "label": "Forbidden inclusion",
+            "format": "percent"
+          },
+          {
+            "field": "budget_violation_rate",
+            "label": "Budget violations",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "claim_table",
+        "title": "Evidence supports engineering claims, not a revolutionary conclusion",
+        "subtitle": "Each claim is classified by the strongest public evidence available on July 22, 2026.",
+        "dataset": "claim_status",
+        "sourceId": "claim_assessment",
+        "defaultSort": {
+          "field": "claim",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "claim",
+            "label": "Claim",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "evidence",
+            "label": "Strongest evidence",
+            "type": "text"
+          },
+          {
+            "field": "required_next",
+            "label": "Required next evidence",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "test_evidence",
+        "label": "Passing test count from the final engineering verification",
+        "path": "docs/FINAL_REPORT.md",
+        "query": {
+          "sql": "SELECT 61 AS passing_tests;"
+        }
+      },
+      {
+        "id": "case_count_evidence",
+        "label": "Case count from the offline benchmark",
+        "path": "artifacts/benchmark/latest.json",
+        "query": {
+          "sql": "SELECT 240 AS case_count;"
+        }
+      },
+      {
+        "id": "live_evidence",
+        "label": "Comparative-run count from the GPT-5.6 Sol runtime evidence",
+        "path": "artifacts/online/latest.json",
+        "query": {
+          "sql": "SELECT 0 AS comparative_runs;"
+        }
+      },
+      {
+        "id": "replication_evidence",
+        "label": "Independent-replication count from the impact audit",
+        "path": "docs/IMPACT_AUDIT.md",
+        "query": {
+          "sql": "SELECT 0 AS replications;"
+        }
+      },
+      {
+        "id": "benchmark_extract",
+        "label": "Reviewed aggregate rows from the offline benchmark",
+        "path": "artifacts/benchmark/latest.json",
+        "query": {
+          "sql": "WITH benchmark_results(system, recall, precision, forbidden_case_rate, budget_violation_rate) AS (VALUES ('Acheon full', 1.0, 0.8571428571, 0.0, 0.0), ('Recent tail', 0.1666666667, 0.1428571429, 1.0, 0.0), ('Chronological prefix', 0.0, 0.0, 0.0, 0.0), ('Lexical top-k', 0.0, 0.0, 1.0, 0.0)) SELECT * FROM benchmark_results;"
+        }
+      },
+      {
+        "id": "claim_assessment",
+        "label": "Evidence-tier assessment from the impact audit",
+        "path": "docs/IMPACT_AUDIT.md",
+        "query": {
+          "sql": "WITH claim_status(claim, status, evidence, required_next) AS (VALUES ('Deterministic governance contracts', 'Ready to share', '61 tests and exact packet traces', 'Independent implementation review'), ('Synthetic selection advantage', 'Ready with caveats', '240 fixed-seed, rule-aligned cases', 'Held-out data and strong baselines'), ('Improved model answers', 'Not established', 'One direct model run; no Acheon comparison', 'Repeated same-model equal-token comparison'), ('Major long-term impact', 'Credible hypothesis', 'Important problem and integrated control contract', 'External adoption and independent replication'), ('Paradigm-level revolution', 'Not established', 'No downstream or real-workflow proof', 'Stable cross-model gains on real long-horizon tasks')) SELECT * FROM claim_status;"
+        }
+      },
+      {
+        "id": "context_integrity_eval",
+        "label": "GPT-5.6 Sol standalone context-integrity observation",
+        "path": "artifacts/online/context-integrity-latest.json"
+      },
+      {
+        "id": "context_integrity_review",
+        "label": "Human-reviewed reproduction of the one observed failure",
+        "path": "artifacts/online/context-integrity-failure-review.json"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Acheon impact and evidence audit"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "## Conditional go: the infrastructure thesis is credible, while revolutionary impact remains unproven\n\nAcheon has a defensible path to major long-term impact as a deterministic context-governance layer between retrieval systems and models. Its integrated lifecycle, scope, dependency, conflict, budget, reason-trace, and audit contracts solve a real long-horizon agent problem. The present release is a strong research alpha. It does not yet demonstrate a general improvement in model behavior, and public claims should keep paradigm-level impact as a hypothesis."
+      },
+      {
+        "id": "status_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "tests_card",
+          "cases_card",
+          "comparative_runs_card",
+          "replication_card"
+        ]
+      },
+      {
+        "id": "benchmark_finding",
+        "type": "markdown",
+        "body": "## The compiler satisfies its declared selection contract on the public generator\n\nThe full policy retains every declared relevant record, excludes forbidden records, and stays within the same final rendered-packet budget used by three simple controls. This is strong evidence for deterministic engineering behavior. It is not a measurement of answer correctness or model intelligence, and the common case template makes the apparent statistical certainty much stronger than the external-generalization evidence."
+      },
+      {
+        "id": "benchmark_chart_block",
+        "type": "chart",
+        "chartId": "benchmark_recall_chart"
+      },
+      {
+        "id": "benchmark_results_block",
+        "type": "table",
+        "tableId": "benchmark_table"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## The evidence tiers prevent selection metrics from becoming model claims\n\n**Engineering contracts** are deterministic unit and integration assertions. **Synthetic observations** are exact results on a fixed, disclosed generator. **Live model observations** require real provider calls and preserve the observed receipt. **Independent evidence** requires unseen data or external replication. Recall and precision use explicit record IDs as their denominator; forbidden inclusion is the share of cases selecting at least one disallowed record. Estimated units are provider-independent and are not exact GPT tokenizer counts."
+      },
+      {
+        "id": "claim_status_block",
+        "type": "table",
+        "tableId": "claim_table"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## The audit recomputed headline values and tested the release boundary\n\nThe review reran all tests, code-format checks, diff checks, and release verification; parsed the machine-readable benchmark; checked case uniqueness, label distributions, budgets, system aggregates, and failure counts; reproduced the public context packet from the live receipt; ran one standalone 24-sample context-integrity observation with a labeled grader meta-eval; and compared the public architecture with primary literature on retrieval-augmented, hierarchical, lifecycle-aware, dependency-aware, and auditable memory systems. Descriptive evidence and prospective impact were evaluated separately."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Template alignment and weak controls are the main threats to validity\n\nAll 240 offline cases share six relevant and four forbidden roles, one dependency, one current fact, 64 history records, and the same budget. System metadata and gold labels were designed together. The controls omit metadata-aware BM25, embedding or hybrid retrieval, summary compression, full long context, and mature memory frameworks. Disabling rank fusion produces no measured change. The adapter smoke receipt has no answer text or comparison. The separate 24-case direct model run has one repetition, uses the same model as solver and grader, retains no raw answers, and has no Acheon condition. These limitations block any claim of observed Acheon-attributable downstream or paradigm-level improvement."
+      },
+      {
+        "id": "competitive_context",
+        "type": "markdown",
+        "body": "## Acheon's differentiation is governance integration, not a new retrieval primitive\n\nRAG, hierarchical context management, lifecycle and provenance tracking, dependency-aware construction, conflict handling, and auditable symbolic memory all have published precedents. Acheon's credible distinction is the single offline contract that combines hard gates, protected dependencies, visible conflicts, per-record reasons, canonical packet digests, and source-state-bound audit receipts. The review did not establish a global first or freedom-to-operate conclusion."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Public behavior evaluation should lead the next phase\n\nThe 2026 OpenAI Build Week prize deadline has passed, so the active routes are OpenAI Evals, Showcase, Developer Community, and explicitly authorized sanitized feedback.\n\n1. Publish the sanitized OpenAI Evals package covering constraint retention, supersession, revocation, conflict disclosure, dependency completeness, scope isolation, untrusted history, budget priority, and calibrated uncertainty.\n2. Add held-out task families and compare the same model at equal actual input-token budgets against hybrid retrieval, summaries, full context, and mature memory systems.\n3. Repeat runs with preregistered rubrics and report answer correctness, leakage, stale-information use, conflicts, tokens, latency, cost, and all failures.\n4. Add a separate evaluation for write, update, reject, revoke, and rollback decisions.\n5. Seek independent replication before upgrading public claims."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## The decisive questions are interoperability and downstream causality\n\n- Can an open context-packet contract work across retrievers and agent frameworks?\n- Which governance invariants remain valuable when models have very large native context windows and provider compaction?\n- How much downstream gain comes from hard governance rules versus retrieval quality?\n- Which memory-poisoning and permission failures should block writes instead of merely lowering rank?\n- Can an external team reproduce a task-success advantage on unseen long-running workflows?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-22T08:30:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "engineering_status": [
+        {
+          "passing_tests": 61
+        }
+      ],
+      "benchmark_status": [
+        {
+          "case_count": 240
+        }
+      ],
+      "live_evidence_status": [
+        {
+          "comparative_runs": 0
+        }
+      ],
+      "impact_status": [
+        {
+          "replications": 0
+        }
+      ],
+      "benchmark_results": [
+        {
+          "system": "Acheon full",
+          "recall": 1.0,
+          "precision": 0.8571428571,
+          "forbidden_case_rate": 0.0,
+          "budget_violation_rate": 0.0
+        },
+        {
+          "system": "Recent tail",
+          "recall": 0.1666666667,
+          "precision": 0.1428571429,
+          "forbidden_case_rate": 1.0,
+          "budget_violation_rate": 0.0
+        },
+        {
+          "system": "Chronological prefix",
+          "recall": 0.0,
+          "precision": 0.0,
+          "forbidden_case_rate": 0.0,
+          "budget_violation_rate": 0.0
+        },
+        {
+          "system": "Lexical top-k",
+          "recall": 0.0,
+          "precision": 0.0,
+          "forbidden_case_rate": 1.0,
+          "budget_violation_rate": 0.0
+        }
+      ],
+      "claim_status": [
+        {
+          "claim": "Deterministic governance contracts",
+          "status": "Ready to share",
+          "evidence": "61 tests and exact packet traces",
+          "required_next": "Independent implementation review"
+        },
+        {
+          "claim": "Synthetic selection advantage",
+          "status": "Ready with caveats",
+          "evidence": "240 fixed-seed, rule-aligned cases",
+          "required_next": "Held-out data and strong baselines"
+        },
+        {
+          "claim": "Improved model answers",
+          "status": "Not established",
+          "evidence": "One direct model run; no Acheon comparison",
+          "required_next": "Repeated same-model equal-token comparison"
+        },
+        {
+          "claim": "Major long-term impact",
+          "status": "Credible hypothesis",
+          "evidence": "Important problem and integrated control contract",
+          "required_next": "External adoption and independent replication"
+        },
+        {
+          "claim": "Paradigm-level revolution",
+          "status": "Not established",
+          "evidence": "No downstream or real-workflow proof",
+          "required_next": "Stable cross-model gains on real long-horizon tasks"
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "test_evidence",
+      "label": "Passing test count from the final engineering verification",
+      "path": "docs/FINAL_REPORT.md",
+      "query": {
+        "sql": "SELECT 61 AS passing_tests;"
+      }
+    },
+    {
+      "id": "case_count_evidence",
+      "label": "Case count from the offline benchmark",
+      "path": "artifacts/benchmark/latest.json",
+      "query": {
+        "sql": "SELECT 240 AS case_count;"
+      }
+    },
+    {
+      "id": "live_evidence",
+      "label": "Comparative-run count from the GPT-5.6 Sol runtime evidence",
+      "path": "artifacts/online/latest.json",
+      "query": {
+        "sql": "SELECT 0 AS comparative_runs;"
+      }
+    },
+    {
+      "id": "replication_evidence",
+      "label": "Independent-replication count from the impact audit",
+      "path": "docs/IMPACT_AUDIT.md",
+      "query": {
+        "sql": "SELECT 0 AS replications;"
+      }
+    },
+    {
+      "id": "benchmark_extract",
+      "label": "Reviewed aggregate rows from the offline benchmark",
+      "path": "artifacts/benchmark/latest.json",
+      "query": {
+        "sql": "WITH benchmark_results(system, recall, precision, forbidden_case_rate, budget_violation_rate) AS (VALUES ('Acheon full', 1.0, 0.8571428571, 0.0, 0.0), ('Recent tail', 0.1666666667, 0.1428571429, 1.0, 0.0), ('Chronological prefix', 0.0, 0.0, 0.0, 0.0), ('Lexical top-k', 0.0, 0.0, 1.0, 0.0)) SELECT * FROM benchmark_results;"
+      }
+    },
+    {
+      "id": "claim_assessment",
+      "label": "Evidence-tier assessment from the impact audit",
+      "path": "docs/IMPACT_AUDIT.md",
+      "query": {
+        "sql": "WITH claim_status(claim, status, evidence, required_next) AS (VALUES ('Deterministic governance contracts', 'Ready to share', '61 tests and exact packet traces', 'Independent implementation review'), ('Synthetic selection advantage', 'Ready with caveats', '240 fixed-seed, rule-aligned cases', 'Held-out data and strong baselines'), ('Improved model answers', 'Not established', 'One direct model run; no Acheon comparison', 'Repeated same-model equal-token comparison'), ('Major long-term impact', 'Credible hypothesis', 'Important problem and integrated control contract', 'External adoption and independent replication'), ('Paradigm-level revolution', 'Not established', 'No downstream or real-workflow proof', 'Stable cross-model gains on real long-horizon tasks')) SELECT * FROM claim_status;"
+      }
+    },
+    {
+      "id": "context_integrity_eval",
+      "label": "GPT-5.6 Sol standalone context-integrity observation",
+      "path": "artifacts/online/context-integrity-latest.json"
+    },
+    {
+      "id": "context_integrity_review",
+      "label": "Human-reviewed reproduction of the one observed failure",
+      "path": "artifacts/online/context-integrity-failure-review.json"
+    }
+  ]
+}

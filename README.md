@@ -113,11 +113,21 @@ model, request/response IDs, usage, 11,530.3 ms latency, packet digest, selected
 timestamp, and failures. It proves the live runtime path completed; it is not a
 raw-versus-Acheon comparison or evidence of general answer-quality improvement.
 
+A separate aggregate receipt at
+[`artifacts/online/context-integrity-latest.json`](artifacts/online/context-integrity-latest.json)
+records one GPT-5.6 Sol run over 24 hand-authored context-integrity cases: 16/16
+labeled grader checks and 23/24 automated primary passes, with no invalid grader
+outputs. A separately inspected reproduction of `lhci-016` omitted two required
+traceability details. This run did not include an Acheon condition, used the same
+model for answers and grading, retained no raw outputs, and had one repetition. It
+supports the public Eval's usefulness, not a claim that Acheon improved the model.
+
 ## Reproduce the evaluation
 
 ```powershell
 .venv\Scripts\python -m unittest discover -s tests -v
 .venv\Scripts\python -m acheon.evals.run --output artifacts/benchmark/latest.json
+.venv\Scripts\python scripts/verify_openai_contribution.py
 .venv\Scripts\python scripts/verify_release.py
 ```
 
@@ -146,18 +156,21 @@ typed records -> versioned SQLite store -> lifecycle/scope gate
 More detail: [architecture](docs/ARCHITECTURE.md),
 [OpenAI integration](docs/OPENAI_INTEGRATION.md), and [security](SECURITY.md).
 
-## Build Week package
+## OpenAI contribution package
 
-Acheon targets the **Developer Tools** track. The submission copy, demo narration,
-Codex usage record, and final release checklist are in [`docs/`](docs/).
+The 2026 OpenAI Build Week challenge closed on July 21 at 5:00 PM PT, so this
+repository no longer presents its prepared materials as an active prize submission.
+The same quality standard now feeds three still-relevant contribution paths:
 
-Manual actions intentionally not performed by the repository automation:
+- an OpenAI Showcase application package;
+- a sanitized OpenAI Evals proposal for long-horizon context integrity;
+- a Developer Community technical post and optional sanitized API feedback cases.
 
-- legal eligibility confirmation;
-- Devpost registration and final submission;
-- the Codex `/feedback` session ID;
-- any larger same-model comparative online evaluation beyond the checked-in
-  single-call runtime receipt.
+The reviewed public materials and disclosure boundary live in
+[`contributions/openai/`](contributions/openai/). Identity, rights, license,
+data-sharing, agreement acceptance, and final external submission remain explicit
+operator decisions. See the [impact audit](docs/IMPACT_AUDIT.md) for the conditional
+go decision and the evidence required before stronger model-behavior claims.
 
 Build the allowlisted, credential-free handoff archive after verification:
 
@@ -183,4 +196,6 @@ MIT. See [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ---
 
-中文简介：Acheon 是一个面向长时程 AI 工作流的应用层上下文编译器。它在固定预算内选择并组织当前有效的指令、决策、证据和依赖，输出可审计的选择轨迹；它不修改模型权重，也不扩大官方上下文窗口。
+中文简介：Acheon 是一个面向长时程 AI 工作流的应用层上下文治理编译器。
+它在固定预算内选择并组织当前有效的指令、决策、证据和依赖，输出可审计的
+选择轨迹；它不修改模型权重，也不扩大服务商提供的上下文窗口。

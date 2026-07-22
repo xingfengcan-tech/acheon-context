@@ -1,0 +1,35 @@
+{
+  "form_url": "https://openai.com/form/showcase-submission/",
+  "prepared_on": "2026-07-22",
+  "operator_fields": {
+    "first_name": null,
+    "last_name": null,
+    "email": null,
+    "website_or_social_profile": "https://github.com/xingfengcan-tech",
+    "display_author_name": null
+  },
+  "project_fields": {
+    "project_type": "Open-source developer tool and local interactive demo",
+    "used_codex": "Yes",
+    "used_another_coding_agent": "No",
+    "tech_stack": "Python 3.11+, SQLite, standard-library HTTP server, vanilla JavaScript, OpenAI Responses API",
+    "use_cases": "Long-running agents, developer workflows, auditable context selection, scoped memory, reproducible AI evaluation",
+    "capability": "Application-layer context governance: lifecycle and scope gates, dependency-complete selection, visible conflicts, strict estimated-token budgets, deterministic reason traces, and reproducible offline evaluation.",
+    "openai_models_and_apis": "OpenAI Responses API with GPT-5.6 Sol for the optional live path. The deterministic compiler, local demo, and benchmark run without a model or network connection.",
+    "other_models_or_apis": "No other model API is required or used by the reviewed release.",
+    "building_process": "Codex helped inspect the repository, implement and red-team the deterministic compiler, expand tests, generate release artifacts, and verify public claims. The final package preserves every failure and separates offline contract evidence, one API-path smoke test, and one 24-sample model-behavior observation.",
+    "public_github_repository": "https://github.com/xingfengcan-tech/acheon-context",
+    "hosted_url": null,
+    "setup_steps": "Install Python 3.11+. Download the release wheel, then run: python -m pip install acheon_context-0.1.0-py3-none-any.whl; acheon demo; acheon serve --port 8000. Open http://127.0.0.1:8000. The default demo is local and needs no API key.",
+    "title": "Acheon: Auditable Context for Long-Running AI Workflows",
+    "tagline": "A deterministic control layer that turns noisy histories into bounded, inspectable context while preserving current constraints, dependencies, and unresolved conflicts.",
+    "description": "Acheon is an open-source application-layer context governance compiler for long-running AI workflows. It stores typed, versioned records; excludes revoked, expired, superseded, and out-of-scope material; preserves required dependencies and visible conflicts; and emits a bounded canonical context packet with a reason code for every selection decision.\n\nThe offline core includes a local UI, equal-budget controls, ablations, full failures, a 240-case synthetic selection benchmark, and a separate 24-case model-behavior eval. An optional Responses API adapter sends the compiled packet to GPT-5.6 Sol with stored history treated as untrusted data. Acheon does not modify model weights, expand a provider context window, or claim permanent model memory. Current evidence establishes engineering contracts and high-impact potential, not an Acheon-attributable answer-quality improvement.",
+    "cover_image_url": "https://raw.githubusercontent.com/xingfengcan-tech/acheon-context/main/docs/architecture.png"
+  },
+  "operator_attestations": {
+    "owns_or_has_permission_for_cover_and_content": null,
+    "has_authority_to_accept_program_agreement": null,
+    "accepts_showcase_program_agreement": null,
+    "final_submit": null
+  }
+}
